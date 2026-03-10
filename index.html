@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIAC - Sistema Integral de Atención al Cliente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4a90e2 0%, #3570b2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 4px solid #2d9cdb;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 2px;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            font-weight: 300;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        /* Botones principales */
+        .main-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn-main {
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 18px 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 3px solid white;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .btn-main.saludo {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+
+        .btn-main.comercial {
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+        }
+
+        .btn-main.descarga {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+
+        .btn-main.compra {
+            background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-main.saludo:hover {
+            background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+        }
+
+        .btn-main.comercial:hover {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+        }
+
+        .btn-main.descarga:hover {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+        }
+
+        .btn-main.compra:hover {
+            background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
+        }
+
+        /* Panel de agentes (oculto por defecto) */
+        .agents-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease-out;
+            display: none;
+        }
+
+        .agents-panel.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .agents-panel h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-agent {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-agent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .btn-close {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-close:hover {
+            background: #c53030;
+        }
+
+        /* Panel de compra (bancos) */
+        .compra-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease-out;
+            display: none;
+        }
+
+        .compra-panel.visible {
+            display: block;
+        }
+
+        .compra-panel h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .bancos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-banco {
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-banco.venezuela {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        .btn-banco.mercantil {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        }
+
+        .btn-banco:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-banco span {
+            font-size: 2em;
+        }
+
+        .message-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #2d3748;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .message-content strong {
+            color: #4a90e2;
+        }
+
+        .message-content em {
+            color: #718096;
+            font-style: italic;
+        }
+
+        .message-content .venezuela-highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        .payment-details {
+            background: linear-gradient(135deg, #9f7aea20 0%, #805ad520 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #805ad5;
+        }
+
+        .download-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .download-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(66, 153, 225, 0.4);
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-wsp {
+            background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-copy:hover, .btn-wsp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .copied-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideInRight 0.3s ease-out;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .day-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .time-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-left: 10px;
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+
+        .time-indicator.mañana {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .time-indicator.tarde {
+            background: #c3dafe;
+            color: #434190;
+        }
+
+        .time-indicator.noche {
+            background: #e9d8fd;
+            color: #553c9a;
+        }
+
+        .day-indicator.monday {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .day-indicator.weekend {
+            background: #c3dafe;
+            color: #434190;
+        }
+
+        .day-indicator.weekday {
+            background: #e6fffa;
+            color: #234e52;
+        }
+
+        .message-info {
+            text-align: center;
+            color: #4a5568;
+            margin: 10px 0;
+            font-weight: 500;
+            padding: 10px;
+            background: #e6fffa;
+            border-radius: 10px;
+        }
+
+        .message-info.comercial {
+            background: #fed7aa;
+            color: #92400e;
+        }
+
+        .message-info.descarga {
+            background: #e6f0ff;
+            color: #2c5282;
+        }
+
+        .message-info.compra {
+            background: #e9d8fd;
+            color: #553c9a;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .main-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-main {
+                min-width: 100%;
+                padding: 15px 20px;
+                font-size: 1.1em;
+            }
+            
+            .agents-grid, .bancos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SIAC</h1>
+            <h2>Sistema Integral de Atención al Cliente</h2>
+        </div>
+        
+        <div class="subtitle">
+            <span id="dayMessage">Plataforma de mensajes personalizados</span>
+        </div>
+
+        <div class="content">
+            <!-- Botones principales -->
+            <div class="main-buttons">
+                <button class="btn-main saludo" onclick="toggleAgentsPanel()">
+                    <span>💬</span> SALUDO CLIENTE
+                </button>
+                
+                <button class="btn-main comercial" onclick="mostrarMensajeComercial()">
+                    <span>📊</span> COMERCIALIZACIÓN
+                </button>
+
+                <button class="btn-main descarga" onclick="mostrarMensajeDescarga()">
+                    <span>📱</span> DESCARGA MÓVIL
+                </button>
+
+                <button class="btn-main compra" onclick="toggleCompraPanel()">
+                    <span>🛒</span> COMPRA
+                </button>
+            </div>
+
+            <!-- Panel de agentes (oculto inicialmente) -->
+            <div id="agentsPanel" class="agents-panel">
+                <h3>👥 Selecciona un ejecutivo</h3>
+                <div class="agents-grid">
+                    <button class="btn-agent" onclick="generarMensajeSaludo('ANGEL DUGARTE'); toggleAgentsPanel()">
+                        <span>👤</span> ANGEL DUGARTE
+                    </button>
+                    <button class="btn-agent" onclick="generarMensajeSaludo('RICARDO DUGARTE'); toggleAgentsPanel()">
+                        <span>👤</span> RICARDO DUGARTE
+                    </button>
+                    <button class="btn-agent" onclick="generarMensajeSaludo('THANY BRICEÑO'); toggleAgentsPanel()">
+                        <span>👤</span> THANY BRICEÑO
+                    </button>
+                    <button class="btn-agent" onclick="generarMensajeSaludo('CARLOS ZAMBRANO'); toggleAgentsPanel()">
+                        <span>👤</span> CARLOS ZAMBRANO
+                    </button>
+                    <button class="btn-agent" onclick="generarMensajeSaludo('MARIA RIVAS'); toggleAgentsPanel()">
+                        <span>👤</span> MARIA RIVAS
+                    </button>
+                    <button class="btn-agent" onclick="generarMensajeSaludo('JOSE ALTUVE'); toggleAgentsPanel()">
+                        <span>👤</span> JOSE ALTUVE
+                    </button>
+                </div>
+                <button class="btn-close" onclick="toggleAgentsPanel()">✕ CERRAR</button>
+            </div>
+
+            <!-- Panel de compra (bancos) -->
+            <div id="compraPanel" class="compra-panel">
+                <h3>🏦 Selecciona el banco para el pago</h3>
+                <div class="bancos-grid">
+                    <button class="btn-banco venezuela" onclick="mostrarMensajeCompra('VENEZUELA'); toggleCompraPanel()">
+                        <span>🏦</span>
+                        BANCO DE VENEZUELA
+                    </button>
+                    <button class="btn-banco mercantil" onclick="mostrarMensajeCompra('MERCANTIL'); toggleCompraPanel()">
+                        <span>🏦</span>
+                        BANCO MERCANTIL
+                    </button>
+                </div>
+                <button class="btn-close" onclick="toggleCompraPanel()">✕ CERRAR</button>
+            </div>
+
+            <!-- Contenedor del mensaje (visible después de seleccionar opción) -->
+            <div id="messageContainer" class="message-container" style="display: none;">
+                <div class="message-info" id="messageInfo"></div>
+                <div id="messageContent" class="message-content"></div>
+                
+                <div class="action-buttons">
+                    <button class="btn-copy" onclick="copiarMensaje()">
+                        <span>📋</span> COPIAR MENSAJE
+                    </button>
+                    
+                    <button class="btn-wsp" onclick="abrirWhatsApp()">
+                        <span>📱</span> WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 SIAC - Sistema Integral de Atención al Cliente | Desarrollado para PANAXTREAMING</p>
+        </div>
+    </div>
+
+    <script>
+        let mensajeActual = '';
+
+        function toggleAgentsPanel() {
+            const panel = document.getElementById('agentsPanel');
+            panel.classList.toggle('visible');
+            
+            // Cerrar panel de compra si está abierto
+            document.getElementById('compraPanel').classList.remove('visible');
+            
+            if (panel.classList.contains('visible')) {
+                setTimeout(() => {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        function toggleCompraPanel() {
+            const panel = document.getElementById('compraPanel');
+            panel.classList.toggle('visible');
+            
+            // Cerrar panel de agentes si está abierto
+            document.getElementById('agentsPanel').classList.remove('visible');
+            
+            if (panel.classList.contains('visible')) {
+                setTimeout(() => {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        function obtenerSaludoPorHora() {
+            const hora = new Date().getHours();
+            
+            if (hora >= 5 && hora < 12) {
+                return {
+                    saludo: '¡Muy buenos y bendecidos días!',
+                    emoji: '☀️',
+                    periodo: 'mañana',
+                    texto: 'Buenos días'
+                };
+            } else if (hora >= 12 && hora < 19) {
+                return {
+                    saludo: '¡Muy buenas y bendecidas tardes!',
+                    emoji: '⛅',
+                    periodo: 'tarde',
+                    texto: 'Buenas tardes'
+                };
+            } else {
+                return {
+                    saludo: '¡Muy buenas y bendecidas noches!',
+                    emoji: '🌙',
+                    periodo: 'noche',
+                    texto: 'Buenas noches'
+                };
+            }
+        }
+
+        function obtenerSaludoDiaSemana() {
+            const fecha = new Date();
+            const diaSemana = fecha.getDay();
+            const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+            
+            let saludoAdicional = '';
+            let claseDia = 'weekday';
+            
+            if (diaSemana === 1) { // Lunes
+                saludoAdicional = '¡Feliz inicio de semana!';
+                claseDia = 'monday';
+            } else if (diaSemana === 5 || diaSemana === 6 || diaSemana === 0) { // Viernes, sábado, domingo
+                saludoAdicional = '¡Feliz fin de semana!';
+                claseDia = 'weekend';
+            }
+            
+            const diaNombre = dias[diaSemana];
+            const diaMayuscula = diaNombre.charAt(0).toUpperCase() + diaNombre.slice(1);
+            
+            return {
+                saludo: saludoAdicional,
+                clase: claseDia,
+                dia: diaMayuscula
+            };
+        }
+
+        function generarMensajeSaludo(ejecutivo) {
+            const saludoHora = obtenerSaludoPorHora();
+            const saludoDia = obtenerSaludoDiaSemana();
+            const mensajeSaludoDia = saludoDia.saludo ? ` ${saludoDia.saludo}` : '';
+            
+            mensajeActual = `${saludoHora.saludo}${mensajeSaludoDia} ${saludoHora.emoji} Desde *PANAXTREAMING*, tu plataforma de entretenimiento, le escribe *${ejecutivo}*, Ejecutivo de Atención al Usuario de *PANAXTREAMING TV GO*. 🤝
+
+Ofrecemos disculpas por la demora en responder su mensaje; debido al alto número de chats, el suyo es superimportante para nosotros. 📈✨
+
+_Tendré el gusto de atenderle en este día._ 👨‍💻🎬`;
+
+            mostrarMensajeEnPantalla(
+                `💬 Mensaje de saludo - Ejecutivo: ${ejecutivo} (${saludoHora.texto})`, 
+                mensajeActual, 
+                'saludo'
+            );
+            
+            // Actualizar el subtítulo
+            const dayMessage = document.getElementById('dayMessage');
+            dayMessage.innerHTML = `💬 Mensaje de saludo para: <strong>${ejecutivo}</strong> 
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeComercial() {
+            mensajeActual = `¡BASTA DE BLOQUEOS Y FALLAS DE HOGAR! 🥊📺
+¿Te ha pasado? Estás en lo mejor de la película o el partido y... ¡ZAS! Te sale el aviso de "Error de hogar" o te pide un código que no tienes. 🙄 No importa quién te venda Netflix, las restricciones son las mismas.
+
+¡Rompe las cadenas con PANAXTREAMING! 🇻🇪 Orgullosamente venezolanos, ofreciendo libertad total. Además, contamos con FLUJO TV, la plataforma más reconocida del mercado. ¡Tú eliges la excelencia! 💎✨
+
+✅ DEPORTES PREMIUM SIN LÍMITES: Disfruta en vivo de ESPN, Fox Sports, DirecTV Sports y mucho más. ¡No te pierdas ni un solo juego! ⚽🏀🏈
+✅ MÁXIMA COMPATIBILIDAD: Úsalo en tu Roku, Teléfono Android, PC, Smart TV o Fire Stick sin complicaciones. 💻📱📺
+✅ TODO EN UNO: +1.500 canales, estrenos de cine y las mejores series de todas las apps.
+✅ SIN BLOQUEOS: Conéctate desde donde quieras, sin dramas de códigos ni restricciones de hogar.
+
+💸 NUESTROS PRECIOS (Tasa BCV):
+☀️ PANAXTREAMING (Orgullo Nacional 🇻🇪)
+
+1️⃣ Pantalla Individual: $3
+
+3️⃣ Cuenta Completa: $7.5
+
+💎 FLUJO TV (Líder del Mercado)
+
+1️⃣ Pantalla Individual: $4.5
+
+3️⃣ Cuenta Completa: $8.5
+
+¡No pagues más por un servicio con límites! Deja atrás los precios caros y las frustraciones. 🚀
+
+Pide tu demo hoy mismo y vive la verdadera televisión sin límites. 📲🔥 ¡Escríbenos ya!`;
+
+            mostrarMensajeEnPantalla('📊 MENSAJE DE COMERCIALIZACIÓN', mensajeActual, 'comercial');
+            
+            // Actualizar el subtítulo
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📊 COMERCIALIZACIÓN 
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeDescarga() {
+            mensajeActual = `*TODO EL ENTRETENIMIENTO EN TUS MANOS CON PANAXTREAMING EN TU MOVIL*
+
+Descarga Mobile _*HAGA CLICK AQUI PARA DESCARGAR PANAXTREAMING EN SU TELEFONO ANDROID*_
+
+https://telesatstreaming.com/Pana/PANAXTREAMING.apk`;
+
+            mostrarMensajeEnPantalla('📱 DESCARGA PARA MÓVILES - ANDROID', mensajeActual, 'descarga');
+            
+            // Actualizar el subtítulo
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📱 DESCARGA MÓVIL 
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeCompra(banco) {
+            const nombreBanco = banco === 'VENEZUELA' ? 'Banco de Venezuela' : 'Banco Mercantil';
+            
+            mensajeActual = `*Para procesar su pedido y registrar el servicio, por favor envíenos los siguientes datos:*
+
+👤 *Nombre y Apellido:*
+📞 *Teléfono de contacto:*
+📧 *Correo electrónico:*
+🆔 *Cédula:*
+
+💳 *DATOS PARA EL PAGO MÓVIL:*
+🏦 *Banco:* ${nombreBanco}
+🆔 *Cédula:* 13.967.475
+📱 *Teléfono:* 0412-0754787
+
+📧 *A su correo electrónico llegará el comprobante de su compra* 🧾 *y las futuras renovaciones del servicio* 🔄
+
+✨ *¡Muchas gracias por su confianza!* ✨`;
+
+            mostrarMensajeEnPantalla(`🛒 SOLICITUD DE COMPRA - ${nombreBanco}`, mensajeActual, 'compra');
+            
+            // Actualizar el subtítulo
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `🛒 COMPRA - ${nombreBanco}
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeEnPantalla(info, mensaje, tipo = '') {
+            const messageContainer = document.getElementById('messageContainer');
+            const messageContent = document.getElementById('messageContent');
+            const messageInfo = document.getElementById('messageInfo');
+            
+            // Mostrar el mensaje con formato HTML
+            let mensajeHTML = mensaje
+                .replace(/\n/g, '<br>')
+                .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+                .replace(/_(.*?)_/g, '<em>$1</em>');
+            
+            // Si es mensaje de descarga, hacer el enlace clickeable
+            if (tipo === 'descarga') {
+                mensajeHTML = mensajeHTML.replace(
+                    'https://telesatstreaming.com/Pana/PANAXTREAMING.apk',
+                    '<a href="https://telesatstreaming.com/Pana/PANAXTREAMING.apk" target="_blank" class="download-link">📲 DESCARGAR APK</a>'
+                );
+            }
+            
+            messageContent.innerHTML = mensajeHTML;
+            
+            // Agregar clase específica para el tipo de mensaje
+            messageInfo.className = 'message-info';
+            if (tipo === 'comercial') {
+                messageInfo.classList.add('comercial');
+            } else if (tipo === 'descarga') {
+                messageInfo.classList.add('descarga');
+            } else if (tipo === 'compra') {
+                messageInfo.classList.add('compra');
+            }
+            messageInfo.innerHTML = info;
+            
+            messageContainer.style.display = 'block';
+            
+            // Scroll suave hacia el mensaje
+            setTimeout(() => {
+                messageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        function copiarMensaje() {
+            if (!mensajeActual) {
+                mostrarNotificacion('⚠️ Por favor, genera un mensaje primero', 'error');
+                return;
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(mensajeActual).then(() => {
+                    mostrarNotificacion('✅ Mensaje copiado al portapapeles', 'success');
+                }).catch(err => {
+                    console.error('Error al copiar: ', err);
+                    fallbackCopiarMensaje();
+                });
+            } else {
+                fallbackCopiarMensaje();
+            }
+        }
+
+        function fallbackCopiarMensaje() {
+            const textarea = document.createElement('textarea');
+            textarea.value = mensajeActual;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    mostrarNotificacion('✅ Mensaje copiado al portapapeles', 'success');
+                } else {
+                    mostrarNotificacion('❌ Error al copiar el mensaje', 'error');
+                }
+            } catch (err) {
+                console.error('Error en fallback de copiado: ', err);
+                mostrarNotificacion('❌ No se pudo copiar el mensaje', 'error');
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        function mostrarNotificacion(mensaje, tipo) {
+            const notificacionesExistentes = document.querySelectorAll('.copied-notification');
+            notificacionesExistentes.forEach(notif => notif.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'copied-notification';
+            
+            if (tipo === 'error') {
+                notification.style.background = '#f56565';
+            }
+            
+            notification.textContent = mensaje;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function abrirWhatsApp() {
+            if (!mensajeActual) {
+                mostrarNotificacion('⚠️ Por favor, genera un mensaje primero', 'error');
+                return;
+            }
+            
+            const mensajeCodificado = encodeURIComponent(mensajeActual);
+            window.open(`https://wa.me/?text=${mensajeCodificado}`, '_blank');
+        }
+
+        // Mostrar día y hora actual al cargar la página
+        window.onload = function() {
+            actualizarInfoTiempo();
+            // Actualizar cada minuto
+            setInterval(actualizarInfoTiempo, 60000);
+        };
+
+        function actualizarInfoTiempo() {
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            const dayMessage = document.getElementById('dayMessage');
+            dayMessage.innerHTML = `Hoy es <strong>${saludoDia.dia}</strong> 
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.saludo ? saludoDia.saludo : 'Selecciona una opción'}</span>`;
+        }
+    </script>
+</body>
+</html>
