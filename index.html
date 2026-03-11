@@ -82,8 +82,8 @@
         /* Botones principales */
         .main-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
             margin-bottom: 30px;
         }
 
@@ -91,8 +91,8 @@
             color: white;
             border: none;
             border-radius: 60px;
-            padding: 18px 15px;
-            font-size: 1.1em;
+            padding: 16px 12px;
+            font-size: 1em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -100,10 +100,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             border: 3px solid white;
             text-align: center;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .btn-main.saludo {
@@ -116,6 +116,10 @@
 
         .btn-main.descarga {
             background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        }
+
+        .btn-main.flujo {
+            background: linear-gradient(135deg, #f687b3 0%, #d53f8c 100%);
         }
 
         .btn-main.compra {
@@ -137,6 +141,10 @@
 
         .btn-main.descarga:hover {
             background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+        }
+
+        .btn-main.flujo:hover {
+            background: linear-gradient(135deg, #d53f8c 0%, #97266d 100%);
         }
 
         .btn-main.compra:hover {
@@ -517,8 +525,13 @@
         }
 
         .message-info.descarga {
-            background: #e6f0ff;
+            background: #bee3f8;
             color: #2c5282;
+        }
+
+        .message-info.flujo {
+            background: #fed7e6;
+            color: #97266d;
         }
 
         .message-info.compra {
@@ -577,8 +590,12 @@
                     <span>📊</span> COMERCIALIZACIÓN
                 </button>
 
-                <button class="btn-main descarga" onclick="mostrarMensajeDescarga()">
-                    <span>📱</span> DESCARGA MÓVIL
+                <button class="btn-main descarga" onclick="mostrarMensajeDescargaPanax()">
+                    <span>📱</span> DESCARGA PANAX
+                </button>
+
+                <button class="btn-main flujo" onclick="mostrarMensajeFlujo()">
+                    <span>🔗</span> LINKS FLUJO
                 </button>
 
                 <button class="btn-main compra" onclick="toggleCompraPanel()">
@@ -763,7 +780,7 @@ _Tendré el gusto de atenderle en este día._ 👨‍💻🎬`;
 
 ¿Cansado de pagar Netflix, HBO, Disney+, Amazon y canales deportivos por SEPARADO? 💸 ¡Eso se acabó! En PANAXTREAMING te traemos las dos MEJORES alternativas del mercado para que lo tengas *TODO EN UN SOLO LUGAR*. que podras disfrutar en tu TELEFONO ANDROID, SMARTV, FIRE TV, GOOGLE TV, ROKU PC O LAPTOP 💎
 
-🍿 *PANAXTREAMING TV GO:* La reina del entretenimiento. (*COSTO PANTALLA: 3$*)
+🍿 *PANAXTREAMING TV GO:* La reina del entretenimiento.
 
 🎬 +13.000 Películas y Series (¡los estrenos que todos ven!).
 
@@ -771,7 +788,7 @@ _Tendré el gusto de atenderle en este día._ 👨‍💻🎬`;
 
 📱 Compatible con TODO: Android, Roku, FireStick, Smart TV, PC.
 
-⚽ *FLUJO TV:* La potencia deportiva y de estabilidad. (*COSTO PANTALLA: 4$*)
+⚽ *FLUJO TV:* La potencia deportiva y de estabilidad.
 
 🏀⚾🏎️ +15.000 Películas y Series Y la mejor estabilidad para ESPN, Fox, DirecTV Sports, NBA, MLB y Carreras.
 
@@ -783,13 +800,13 @@ _Tendré el gusto de atenderle en este día._ 👨‍💻🎬`;
 
 ¿Para qué elegir una si puedes tener LAS DOS? 😎 Llévate el acceso a Panaxtreaming Y Flujo TV (una pantalla de cada una) por una oferta ridícula:
 
-💥 *¡SÚPER COMBO DÚO POR SOLO 5.5$ BCV!* (Una Pantalla Panaxtreaming + Una Pantalla FlujoTV)💥
+💥 *¡SÚPER COMBO DÚO POR SOLO 5.5$ BCV!* 💥
 
 Así como lo lees. El doble de contenido por casi la mitad de precio. ¡Deja de preocuparte por pagar facturas individuales y disfruta del verdadero entretenimiento sin límites! 🏆
 
 📌 Precios calculados a Tasa BCV.
 
-¿Quieres tu *DEMO gratis*? LO TENEMOS. Dinos de cuál de las dos deseas. Si deseas demo de las dos también lo tenemos. Compara y contrata el servicio que se adapte a ti🔥 Responde este mensaje y únete a la revolución del entretenimiento. 👇`;
+¿Quieres tu *DEMO gratis*? LO TENEMOS. Dinos de cuál de las dos deseas. 🔥 Responde este mensaje y únete a la revolución del entretenimiento. 👇`;
 
             mostrarMensajeEnPantalla('📊 MENSAJE DE COMERCIALIZACIÓN', mensajeActual, 'comercial');
             
@@ -802,20 +819,41 @@ Así como lo lees. El doble de contenido por casi la mitad de precio. ¡Deja de 
                 <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
-        function mostrarMensajeDescarga() {
+        function mostrarMensajeDescargaPanax() {
             mensajeActual = `*TODO EL ENTRETENIMIENTO EN TUS MANOS CON PANAXTREAMING EN TU MOVIL*
 
 Descarga Mobile _*HAGA CLICK AQUI PARA DESCARGAR PANAXTREAMING EN SU TELEFONO ANDROID*_
 
 https://telesatstreaming.com/Pana/PANAXTREAMING.apk`;
 
-            mostrarMensajeEnPantalla('📱 DESCARGA PARA MÓVILES - ANDROID', mensajeActual, 'descarga');
+            mostrarMensajeEnPantalla('📱 DESCARGA PANAX - ANDROID', mensajeActual, 'descarga');
             
             // Actualizar el subtítulo
             const dayMessage = document.getElementById('dayMessage');
             const saludoDia = obtenerSaludoDiaSemana();
             const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `📱 DESCARGA MÓVIL 
+            dayMessage.innerHTML = `📱 DESCARGA PANAX 
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeFlujo() {
+            mensajeActual = `DISFRUTA TODO EL CONTENIDO EN VIVO CON LA MÁXIMA CALIDAD CON FLUJOTV
+Versión 8.1.1.
+
+*Link de descarga para teléfono móvil Android*
+https://bitcc.net/flujo-mobile-v811
+http://aftv.news/2612862
+Unlinked：40492DE5
+Downloader：2612862`;
+
+            mostrarMensajeEnPantalla('🔗 LINKS FLUJO TV', mensajeActual, 'flujo');
+            
+            // Actualizar el subtítulo
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `🔗 LINKS FLUJO 
                 <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
                 <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
@@ -861,11 +899,20 @@ https://telesatstreaming.com/Pana/PANAXTREAMING.apk`;
                 .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
                 .replace(/_(.*?)_/g, '<em>$1</em>');
             
-            // Si es mensaje de descarga, hacer el enlace clickeable
+            // Si es mensaje de descarga PANAX, hacer el enlace clickeable
             if (tipo === 'descarga') {
                 mensajeHTML = mensajeHTML.replace(
                     'https://telesatstreaming.com/Pana/PANAXTREAMING.apk',
                     '<a href="https://telesatstreaming.com/Pana/PANAXTREAMING.apk" target="_blank" class="download-link">📲 DESCARGAR APK</a>'
+                );
+            }
+            
+            // Si es mensaje de FLUJO, podemos hacer clickeables los enlaces (opcional)
+            if (tipo === 'flujo') {
+                // Convertir los enlaces en hipervínculos
+                mensajeHTML = mensajeHTML.replace(
+                    /(https?:\/\/[^\s]+)/g, 
+                    '<a href="$1" target="_blank" class="download-link" style="display:inline-block; margin:5px 0;">$1</a>'
                 );
             }
             
@@ -877,6 +924,8 @@ https://telesatstreaming.com/Pana/PANAXTREAMING.apk`;
                 messageInfo.classList.add('comercial');
             } else if (tipo === 'descarga') {
                 messageInfo.classList.add('descarga');
+            } else if (tipo === 'flujo') {
+                messageInfo.classList.add('flujo');
             } else if (tipo === 'compra') {
                 messageInfo.classList.add('compra');
             }
