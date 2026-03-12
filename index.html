@@ -82,8 +82,8 @@
         /* Botones principales */
         .main-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
             margin-bottom: 30px;
         }
 
@@ -91,8 +91,8 @@
             color: white;
             border: none;
             border-radius: 60px;
-            padding: 16px 12px;
-            font-size: 1em;
+            padding: 12px 6px;
+            font-size: 0.9em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -100,7 +100,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
             border: 3px solid white;
             text-align: center;
             line-height: 1.2;
@@ -120,6 +120,14 @@
 
         .btn-main.flujo {
             background: linear-gradient(135deg, #f687b3 0%, #d53f8c 100%);
+        }
+
+        .btn-main.generador {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        .btn-main.final {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
         }
 
         .btn-main.compra {
@@ -145,6 +153,14 @@
 
         .btn-main.flujo:hover {
             background: linear-gradient(135deg, #d53f8c 0%, #97266d 100%);
+        }
+
+        .btn-main.generador:hover {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .btn-main.final:hover {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
         }
 
         .btn-main.compra:hover {
@@ -299,6 +315,128 @@
 
         .btn-banco span {
             font-size: 2em;
+        }
+
+        /* Panel generador flujo */
+        .generador-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease-out;
+            display: none;
+        }
+
+        .generador-panel.visible {
+            display: block;
+        }
+
+        .generador-panel h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .opciones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-opcion {
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-opcion.demo {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        .btn-opcion.pantalla {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        }
+
+        .btn-opcion.cuenta {
+            background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+        }
+
+        .btn-opcion:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-opcion span {
+            font-size: 2em;
+        }
+
+        /* Formulario de datos */
+        .datos-form {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #fbbf24;
+        }
+
+        .btn-generar {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-generar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(245, 158, 11, 0.4);
         }
 
         .message-container {
@@ -539,6 +677,29 @@
             color: #553c9a;
         }
 
+        .message-info.generador {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .message-info.final {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .warning-box {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            color: #7f1d1d;
+        }
+
+        .warning-box strong {
+            color: #dc2626;
+        }
+
         @media (max-width: 600px) {
             .header h1 {
                 font-size: 2em;
@@ -554,7 +715,7 @@
                 font-size: 1.1em;
             }
             
-            .agents-grid, .bancos-grid {
+            .agents-grid, .bancos-grid, .opciones-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -583,19 +744,27 @@
             <!-- Botones principales -->
             <div class="main-buttons">
                 <button class="btn-main saludo" onclick="toggleAgentsPanel()">
-                    <span>💬</span> SALUDO CLIENTE
+                    <span>💬</span> SALUDO
                 </button>
                 
                 <button class="btn-main comercial" onclick="mostrarMensajeComercial()">
-                    <span>📊</span> COMERCIALIZACIÓN
+                    <span>📊</span> COMERCIAL
                 </button>
 
                 <button class="btn-main descarga" onclick="mostrarMensajeDescargaPanax()">
-                    <span>📱</span> DESCARGA PANAX
+                    <span>📱</span> PANAX
                 </button>
 
                 <button class="btn-main flujo" onclick="mostrarMensajeFlujo()">
-                    <span>🔗</span> LINKS FLUJO
+                    <span>🔗</span> FLUJO
+                </button>
+
+                <button class="btn-main generador" onclick="toggleGeneradorPanel()">
+                    <span>⚙️</span> GENERADOR
+                </button>
+
+                <button class="btn-main final" onclick="mostrarMensajeFinal()">
+                    <span>🎯</span> FINAL CHAT
                 </button>
 
                 <button class="btn-main compra" onclick="toggleCompraPanel()">
@@ -645,6 +814,48 @@
                 <button class="btn-close" onclick="toggleCompraPanel()">✕ CERRAR</button>
             </div>
 
+            <!-- Panel generador flujo -->
+            <div id="generadorPanel" class="generador-panel">
+                <h3>⚙️ GENERADOR DE MENSAJES FLUJO TV</h3>
+                
+                <!-- Opciones -->
+                <div class="opciones-grid">
+                    <button class="btn-opcion demo" onclick="mostrarFormularioDemo()">
+                        <span>🕐</span>
+                        DEMO FLUJO
+                    </button>
+                    <button class="btn-opcion pantalla" onclick="mostrarFormularioPantalla()">
+                        <span>📱</span>
+                        PANTALLA FLUJO
+                    </button>
+                    <button class="btn-opcion cuenta" onclick="mostrarFormularioCuenta()">
+                        <span>👥</span>
+                        CUENTA FLUJO
+                    </button>
+                </div>
+
+                <!-- Formulario de datos (se muestra según selección) -->
+                <div id="formularioDatos" class="datos-form" style="display: none;">
+                    <h4 id="formTitulo" style="text-align:center; margin-bottom:20px; color:#4a5568;"></h4>
+                    
+                    <div class="form-group">
+                        <label for="usuario">👤 USUARIO:</label>
+                        <input type="text" id="usuario" class="form-control" placeholder="Ingrese el usuario">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clave">🔑 CLAVE:</label>
+                        <input type="text" id="clave" class="form-control" placeholder="Ingrese la clave">
+                    </div>
+                    
+                    <button class="btn-generar" onclick="generarMensajeFlujoPersonalizado()">
+                        <span>⚡</span> GENERAR MENSAJE
+                    </button>
+                </div>
+
+                <button class="btn-close" onclick="toggleGeneradorPanel()">✕ CERRAR</button>
+            </div>
+
             <!-- Contenedor del mensaje (visible después de seleccionar opción) -->
             <div id="messageContainer" class="message-container" style="display: none;">
                 <div class="message-info" id="messageInfo"></div>
@@ -669,13 +880,15 @@
 
     <script>
         let mensajeActual = '';
+        let tipoFlujoActual = '';
 
         function toggleAgentsPanel() {
             const panel = document.getElementById('agentsPanel');
             panel.classList.toggle('visible');
             
-            // Cerrar panel de compra si está abierto
+            // Cerrar otros paneles
             document.getElementById('compraPanel').classList.remove('visible');
+            document.getElementById('generadorPanel').classList.remove('visible');
             
             if (panel.classList.contains('visible')) {
                 setTimeout(() => {
@@ -688,8 +901,9 @@
             const panel = document.getElementById('compraPanel');
             panel.classList.toggle('visible');
             
-            // Cerrar panel de agentes si está abierto
+            // Cerrar otros paneles
             document.getElementById('agentsPanel').classList.remove('visible');
+            document.getElementById('generadorPanel').classList.remove('visible');
             
             if (panel.classList.contains('visible')) {
                 setTimeout(() => {
@@ -698,26 +912,177 @@
             }
         }
 
+        function toggleGeneradorPanel() {
+            const panel = document.getElementById('generadorPanel');
+            panel.classList.toggle('visible');
+            
+            // Cerrar otros paneles
+            document.getElementById('agentsPanel').classList.remove('visible');
+            document.getElementById('compraPanel').classList.remove('visible');
+            
+            // Ocultar formulario al cerrar
+            if (!panel.classList.contains('visible')) {
+                document.getElementById('formularioDatos').style.display = 'none';
+            }
+            
+            if (panel.classList.contains('visible')) {
+                setTimeout(() => {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        function mostrarFormularioDemo() {
+            tipoFlujoActual = 'demo';
+            document.getElementById('formTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO FLUJO TV';
+            document.getElementById('formularioDatos').style.display = 'block';
+            document.getElementById('usuario').value = '';
+            document.getElementById('clave').value = '';
+        }
+
+        function mostrarFormularioPantalla() {
+            tipoFlujoActual = 'pantalla';
+            document.getElementById('formTitulo').innerHTML = '📱 INGRESA DATOS DE PANTALLA FLUJO TV';
+            document.getElementById('formularioDatos').style.display = 'block';
+            document.getElementById('usuario').value = '';
+            document.getElementById('clave').value = '';
+        }
+
+        function mostrarFormularioCuenta() {
+            tipoFlujoActual = 'cuenta';
+            document.getElementById('formTitulo').innerHTML = '👥 INGRESA DATOS DE CUENTA FLUJO TV';
+            document.getElementById('formularioDatos').style.display = 'block';
+            document.getElementById('usuario').value = '';
+            document.getElementById('clave').value = '';
+        }
+
+        function generarMensajeFlujoPersonalizado() {
+            const usuario = document.getElementById('usuario').value.trim();
+            const clave = document.getElementById('clave').value.trim();
+            
+            if (!usuario || !clave) {
+                mostrarNotificacion('⚠️ Por favor ingresa usuario y clave', 'error');
+                return;
+            }
+
+            const fecha = new Date();
+            const opcionesFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            const fechaStr = fecha.toLocaleDateString('es-VE', opcionesFecha);
+            
+            const horaStr = fecha.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+            
+            let mensaje = '';
+
+            if (tipoFlujoActual === 'demo') {
+                const fechaVencimiento = new Date(fecha.getTime() + 3 * 60 * 60 * 1000);
+                const horaVenceStr = fechaVencimiento.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+                
+                mensaje = `*📺 DATOS DE SU DEMO FLUJO TV* 📺
+
+👤 Usuario: ${usuario}
+🔑 Clave: ${clave}
+
+📅 Fecha de entrega: ${fechaStr}
+⏰ Hora de entrega: ${horaStr}
+
+⏳ Vence a las: ${horaVenceStr} (3 horas después de creado)
+
+✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
+
+            } else if (tipoFlujoActual === 'pantalla') {
+                const fechaVencimiento = new Date(fecha);
+                fechaVencimiento.setDate(fecha.getDate() + 30);
+                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
+                
+                mensaje = `*📺 DATOS DE SU PANTALLA FLUJO TV* 📺
+
+👤 Usuario: ${usuario}
+🔑 Clave: ${clave}
+
+📅 Fecha de entrega: ${fechaStr}
+⏰ Hora de entrega: ${horaStr}
+
+📅 Vence: ${fechaVenceStr} (30 días después)
+
+⚠️ *IMPORTANTE*:
+🔴 Prohibido cambiar correo y contraseña
+🔴 Prohibido editar datos de la cuenta
+🔴 Prohibido usar la cuenta en más de 1 dispositivo
+🔴 Prohibido compartir la cuenta
+🔴 Prohibido Cambiar Nombre del Perfil
+🔴 Prohibido Cambiar pin de perfil
+
+❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO
+
+✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
+
+            } else if (tipoFlujoActual === 'cuenta') {
+                const fechaVencimiento = new Date(fecha);
+                fechaVencimiento.setDate(fecha.getDate() + 30);
+                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
+                
+                mensaje = `*📺 DATOS DE SU CUENTA FLUJO TV* 📺
+
+👤 Usuario: ${usuario}
+🔑 Clave: ${clave}
+
+📅 Fecha de entrega: ${fechaStr}
+⏰ Hora de entrega: ${horaStr}
+
+📅 Vence: ${fechaVenceStr} (30 días después)
+
+⚠️ *IMPORTANTE*:
+🔴 Prohibido cambiar correo y contraseña
+🔴 Prohibido editar datos de la cuenta
+🔴 La cuenta puede usarse en 3 dispositivos simultáneos
+🔴 Prohibido compartir la cuenta
+🔴 Prohibido Cambiar Nombre del Perfil
+🔴 Prohibido Cambiar pin de perfil
+
+❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO
+
+✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
+            }
+
+            mensajeActual = mensaje;
+
+            const tipoTexto = tipoFlujoActual === 'demo' ? 'DEMO' : (tipoFlujoActual === 'pantalla' ? 'PANTALLA' : 'CUENTA');
+            
+            mostrarMensajeEnPantalla(`⚙️ GENERADOR FLUJO - ${tipoTexto}`, mensajeActual, 'generador');
+            
+            // Actualizar el subtítulo
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `⚙️ FLUJO ${tipoTexto} - Usuario: ${usuario}
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+            
+            // Ocultar formulario después de generar
+            document.getElementById('formularioDatos').style.display = 'none';
+            toggleGeneradorPanel(); // Cerrar panel
+        }
+
         function obtenerSaludoPorHora() {
             const hora = new Date().getHours();
             
             if (hora >= 5 && hora < 12) {
                 return {
-                    saludo: '¡Muy buenos y bendecidos días!',
+                    saludo: '¡BENDECIDO DÍA PARA TI Y LOS TUYOS!',
                     emoji: '☀️',
                     periodo: 'mañana',
                     texto: 'Buenos días'
                 };
             } else if (hora >= 12 && hora < 19) {
                 return {
-                    saludo: '¡Muy buenas y bendecidas tardes!',
+                    saludo: '¡BENDECIDA TARDE PARA TI Y LOS TUYOS!',
                     emoji: '⛅',
                     periodo: 'tarde',
                     texto: 'Buenas tardes'
                 };
             } else {
                 return {
-                    saludo: '¡Muy buenas y bendecidas noches!',
+                    saludo: '¡BENDECIDA NOCHE PARA TI Y LOS TUYOS!',
                     emoji: '🌙',
                     periodo: 'noche',
                     texto: 'Buenas noches'
@@ -888,6 +1253,55 @@ Downloader：2612862`;
                 <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
+        function mostrarMensajeFinal() {
+            const saludoHora = obtenerSaludoPorHora();
+            
+            mensajeActual = `Gracias por estar hoy acá con nosotros. 🙌✨ ${saludoHora.saludo} 🙏🌈
+
+RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
+
+📺 PANTALLAS Y CUENTAS:
+🔹 DISNEY PLUS (Con 7 ESPN y HULU)
+* Pantalla: 3$ BCV 🖥️
+* Cuenta completa (7 perfiles)
+
+🔹 AMAZON PRIME VIDEO
+* Pantalla: 1.5$ 🎥
+
+🔹 MAX PREMIUM
+* Pantalla: 1.6$ 🍿
+
+🔹 PARAMOUNT
+* Pantalla: 1.5$ 🎞️
+
+🔹 CRUNCHYROLL
+* Pantalla: 1.5$ ⛩️
+
+🎧 APLICACIONES MUSICALES:
+
+🎶 SPOTIFY (Cuenta): 4$
+🎬 YOUTUBE PREMIUM (Cuenta): 4.5$
+
+🎨 APLICACIONES DE DISEÑO:
+
+🖌️ CANVA PRO (Con tu correo): 1$
+🗓️ CANVA PRO (Un año): 10$
+🎬 CAPCUT PRO (Un mes): 3.5$
+🤖 CHAT GPT: 6$
+
+🎮 RECARGAS DE JUEGOS:
+* FREE FIRE y más... 🔥💎`;
+
+            mostrarMensajeEnPantalla('🎯 MENSAJE FINAL DE CHAT', mensajeActual, 'final');
+            
+            // Actualizar el subtítulo
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            dayMessage.innerHTML = `🎯 MENSAJE FINAL DE CHAT 
+                <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span>
+                <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
         function mostrarMensajeEnPantalla(info, mensaje, tipo = '') {
             const messageContainer = document.getElementById('messageContainer');
             const messageContent = document.getElementById('messageContent');
@@ -909,7 +1323,6 @@ Downloader：2612862`;
             
             // Si es mensaje de FLUJO, hacer clickeables los enlaces
             if (tipo === 'flujo') {
-                // Convertir los enlaces en hipervínculos
                 mensajeHTML = mensajeHTML.replace(
                     /(https?:\/\/[^\s]+)/g, 
                     '<a href="$1" target="_blank" class="download-link" style="display:inline-block; margin:5px 0;">$1</a>'
@@ -928,6 +1341,10 @@ Downloader：2612862`;
                 messageInfo.classList.add('flujo');
             } else if (tipo === 'compra') {
                 messageInfo.classList.add('compra');
+            } else if (tipo === 'generador') {
+                messageInfo.classList.add('generador');
+            } else if (tipo === 'final') {
+                messageInfo.classList.add('final');
             }
             messageInfo.innerHTML = info;
             
