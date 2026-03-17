@@ -1037,9 +1037,45 @@
             dayMessage.innerHTML = `🛒 COMPRA - ${nombreBanco} <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
+        // *** NUEVO MENSAJE FINAL ACTUALIZADO ***
         function mostrarMensajeFinal() {
             const saludoHora = obtenerSaludoPorHora();
-            mensajeActual = `Gracias por estar hoy acá con nosotros. 🙌✨ ${saludoHora.saludo} 🙏🌈\n\nRECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥\n\n📺 PANTALLAS Y CUENTAS:\n🔹 DISNEY PLUS (Con 7 ESPN y HULU)\n* Pantalla: 3$ BCV 🖥️\n* Cuenta completa (7 perfiles)\n\n🔹 AMAZON PRIME VIDEO\n* Pantalla: 1.5$ 🎥\n\n🔹 MAX PREMIUM\n* Pantalla: 1.6$ 🍿\n\n🔹 PARAMOUNT\n* Pantalla: 1.5$ 🎞️\n\n🔹 CRUNCHYROLL\n* Pantalla: 1.5$ ⛩️\n\n🎧 APLICACIONES MUSICALES:\n\n🎶 SPOTIFY (Cuenta): 4$\n🎬 YOUTUBE PREMIUM (Cuenta): 4.5$\n\n🎨 APLICACIONES DE DISEÑO:\n\n🖌️ CANVA PRO (Con tu correo): 1$\n🗓️ CANVA PRO (Un año): 10$\n🎬 CAPCUT PRO (Un mes): 3.5$\n🤖 CHAT GPT: 6$\n\n🎮 RECARGAS DE JUEGOS:\n* FREE FIRE y más... 🔥💎`;
+            mensajeActual = `Gracias por estar hoy acá con nosotros. 🙌✨ ${saludoHora.saludo} 🙏🌈
+
+RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
+
+🎧 *APLICACIONES MUSICALES*:
+
+🎶 SPOTIFY (Cuenta): *4$*
+🎬 YOUTUBE PREMIUM (Cuenta): *4.5$*
+
+🎨 *APLICACIONES DE DISEÑO*:
+
+🖌️ CANVA PRO (Con tu correo): *1$*
+🗓️ CANVA PRO (Un año): *10$*
+🎬 CAPCUT PRO (Un mes): *3.5$*
+🤖 CHAT GPT: *6$*
+
+📺 *PANTALLAS Y CUENTAS*:
+
+🔹 DISNEY PLUS (Con 7 ESPN y HULU)
+   Pantalla: *3$ BCV* 🖥️
+   Cuenta completa (7 perfiles)
+
+🔹 AMAZON PRIME VIDEO
+   Pantalla: *1.5$* 🎥
+
+🔹 MAX PREMIUM
+   Pantalla: *1.6$* 🍿
+
+🔹 PARAMOUNT
+   Pantalla: *1.5$* 🎞️
+
+🔹 CRUNCHYROLL
+   Pantalla: *1.5$* ⛩️
+
+🎮 *RECARGAS DE JUEGOS*:
+* FREE FIRE y más... 🔥💎`;
             mostrarMensajeEnPantalla('🎯 MENSAJE FINAL DE CHAT', mensajeActual, 'final');
             const dayMessage = document.getElementById('dayMessage');
             const saludoDia = obtenerSaludoDiaSemana();
