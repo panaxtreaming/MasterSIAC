@@ -32,14 +32,8 @@
         }
 
         @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .header {
@@ -75,9 +69,7 @@
             font-size: 1.1em;
         }
 
-        .content {
-            padding: 30px;
-        }
+        .content { padding: 30px; }
 
         /* Botones principales */
         .main-buttons {
@@ -106,74 +98,23 @@
             line-height: 1.2;
         }
 
-        .btn-main.saludo {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-        }
-
-        .btn-main.comercial {
-            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-        }
-
-        .btn-main.descarga {
-            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-        }
-
-        .btn-main.flujo {
-            background: linear-gradient(135deg, #f687b3 0%, #d53f8c 100%);
-        }
-
-        .btn-main.generadorflujo {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-        }
-
-        .btn-main.generadorpanax {
-            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-        }
-
-        .btn-main.final {
-            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-        }
-
-        .btn-main.compra {
-            background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
-        }
-
-        .btn-main:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        .btn-main.saludo:hover {
-            background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
-        }
-
-        .btn-main.comercial:hover {
-            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
-        }
-
-        .btn-main.descarga:hover {
-            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
-        }
-
-        .btn-main.flujo:hover {
-            background: linear-gradient(135deg, #d53f8c 0%, #97266d 100%);
-        }
-
-        .btn-main.generadorflujo:hover {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        }
-
-        .btn-main.generadorpanax:hover {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-
-        .btn-main.final:hover {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-        }
-
-        .btn-main.compra:hover {
-            background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
-        }
+        .btn-main.saludo { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
+        .btn-main.comercial { background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%); }
+        .btn-main.descarga { background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%); }
+        .btn-main.flujo { background: linear-gradient(135deg, #f687b3 0%, #d53f8c 100%); }
+        .btn-main.generadorflujo { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
+        .btn-main.generadorpanax { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .btn-main.final { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); }
+        .btn-main.compra { background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%); }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .btn-main.saludo:hover { background: linear-gradient(135deg, #128C7E 0%, #075E54 100%); }
+        .btn-main.comercial:hover { background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); }
+        .btn-main.descarga:hover { background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%); }
+        .btn-main.flujo:hover { background: linear-gradient(135deg, #d53f8c 0%, #97266d 100%); }
+        .btn-main.generadorflujo:hover { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .btn-main.generadorpanax:hover { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .btn-main.final:hover { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        .btn-main.compra:hover { background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%); }
 
         /* Paneles */
         .agents-panel, .compra-panel, .generadorflujo-panel, .generadorpanax-panel {
@@ -186,22 +127,11 @@
             animation: slideDown 0.5s ease-out;
             display: none;
         }
-
-        .agents-panel.visible, .compra-panel.visible, .generadorflujo-panel.visible, .generadorpanax-panel.visible {
-            display: block;
-        }
-
+        .agents-panel.visible, .compra-panel.visible, .generadorflujo-panel.visible, .generadorpanax-panel.visible { display: block; }
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         .agents-panel h3, .compra-panel h3, .generadorflujo-panel h3, .generadorpanax-panel h3 {
             color: #4a5568;
             margin-bottom: 20px;
@@ -210,14 +140,12 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #e0e0e0;
         }
-
         .agents-grid, .bancos-grid, .opciones-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
-
         .btn-agent {
             padding: 15px 20px;
             border: none;
@@ -234,13 +162,7 @@
             justify-content: center;
             gap: 10px;
         }
-
-        .btn-agent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        }
-
+        .btn-agent:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); }
         .btn-close {
             background: #e53e3e;
             color: white;
@@ -254,10 +176,7 @@
             width: 100%;
             margin-top: 15px;
         }
-
-        .btn-close:hover {
-            background: #c53030;
-        }
+        .btn-close:hover { background: #c53030; }
 
         /* Botones de opciones para generadores */
         .btn-opcion {
@@ -276,31 +195,12 @@
             justify-content: center;
             gap: 10px;
         }
-
-        .btn-opcion.demo {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-        }
-
-        .btn-opcion.pantalla {
-            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-        }
-
-        .btn-opcion.cuenta {
-            background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
-        }
-
-        .btn-opcion.renovacion {
-            background: linear-gradient(135deg, #9f7aea 0%, #6b46c1 100%);
-        }
-
-        .btn-opcion:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .btn-opcion span {
-            font-size: 2em;
-        }
+        .btn-opcion.demo { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
+        .btn-opcion.pantalla { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .btn-opcion.cuenta { background: linear-gradient(135deg, #f87171 0%, #dc2626 100%); }
+        .btn-opcion.renovacion { background: linear-gradient(135deg, #9f7aea 0%, #6b46c1 100%); }
+        .btn-opcion:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn-opcion span { font-size: 2em; }
 
         /* Panel de compra (bancos) */
         .bancos-grid .btn-banco {
@@ -319,23 +219,10 @@
             justify-content: center;
             gap: 10px;
         }
-
-        .btn-banco.venezuela {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-        }
-
-        .btn-banco.mercantil {
-            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-        }
-
-        .btn-banco:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .btn-banco span {
-            font-size: 2em;
-        }
+        .btn-banco.venezuela { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
+        .btn-banco.mercantil { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .btn-banco:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn-banco span { font-size: 2em; }
 
         /* Formulario de datos */
         .datos-form {
@@ -344,18 +231,13 @@
             padding: 20px;
             margin: 20px 0;
         }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
+        .form-group { margin-bottom: 15px; }
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
             color: #4a5568;
         }
-
         .form-control {
             width: 100%;
             padding: 12px;
@@ -364,12 +246,7 @@
             font-size: 1em;
             transition: border-color 0.3s ease;
         }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #fbbf24;
-        }
-
+        .form-control:focus { outline: none; border-color: #fbbf24; }
         .btn-generar {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             color: white;
@@ -383,12 +260,9 @@
             width: 100%;
             margin-top: 10px;
         }
+        .btn-generar:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(245, 158, 11, 0.4); }
 
-        .btn-generar:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(245, 158, 11, 0.4);
-        }
-
+        /* Contenedor del mensaje */
         .message-container {
             background: #f8f9fa;
             border-radius: 15px;
@@ -397,18 +271,10 @@
             border: 2px solid #e0e0e0;
             animation: fadeIn 0.5s ease-out;
         }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         .message-content {
             font-size: 1.1em;
             line-height: 1.8;
@@ -422,16 +288,8 @@
             max-height: 500px;
             overflow-y: auto;
         }
-
-        .message-content strong {
-            color: #4a90e2;
-        }
-
-        .message-content em {
-            color: #718096;
-            font-style: italic;
-        }
-
+        .message-content strong { color: #4a90e2; }
+        .message-content em { color: #718096; font-style: italic; }
         .download-link {
             display: inline-block;
             background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
@@ -445,19 +303,13 @@
             border: 2px solid white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
-        .download-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(66, 153, 225, 0.4);
-            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
-        }
+        .download-link:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(66, 153, 225, 0.4); }
 
         .action-buttons {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-
         .btn-copy {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
@@ -474,7 +326,6 @@
             justify-content: center;
             gap: 10px;
         }
-
         .btn-wsp {
             background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
             color: white;
@@ -491,11 +342,7 @@
             justify-content: center;
             gap: 10px;
         }
-
-        .btn-copy:hover, .btn-wsp:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
-        }
+        .btn-copy:hover, .btn-wsp:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3); }
 
         .footer {
             background: #f8f9fa;
@@ -519,19 +366,12 @@
             z-index: 1000;
             font-weight: 600;
         }
-
         @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        .day-indicator {
+        .day-indicator, .time-indicator {
             display: inline-block;
             padding: 5px 15px;
             border-radius: 50px;
@@ -539,47 +379,13 @@
             font-weight: 600;
             margin-left: 10px;
         }
-
-        .time-indicator {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin-left: 10px;
-            background: #fed7d7;
-            color: #9b2c2c;
-        }
-
-        .time-indicator.mañana {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .time-indicator.tarde {
-            background: #c3dafe;
-            color: #434190;
-        }
-
-        .time-indicator.noche {
-            background: #e9d8fd;
-            color: #553c9a;
-        }
-
-        .day-indicator.monday {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .day-indicator.weekend {
-            background: #c3dafe;
-            color: #434190;
-        }
-
-        .day-indicator.weekday {
-            background: #e6fffa;
-            color: #234e52;
-        }
+        .time-indicator { background: #fed7d7; color: #9b2c2c; }
+        .time-indicator.mañana { background: #fef3c7; color: #92400e; }
+        .time-indicator.tarde { background: #c3dafe; color: #434190; }
+        .time-indicator.noche { background: #e9d8fd; color: #553c9a; }
+        .day-indicator.monday { background: #fef3c7; color: #92400e; }
+        .day-indicator.weekend { background: #c3dafe; color: #434190; }
+        .day-indicator.weekday { background: #e6fffa; color: #234e52; }
 
         .message-info {
             text-align: center;
@@ -590,81 +396,21 @@
             background: #e6fffa;
             border-radius: 10px;
         }
-
-        .message-info.comercial {
-            background: #fed7aa;
-            color: #92400e;
-        }
-
-        .message-info.descarga {
-            background: #bee3f8;
-            color: #2c5282;
-        }
-
-        .message-info.flujo {
-            background: #fed7e6;
-            color: #97266d;
-        }
-
-        .message-info.generadorflujo {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .message-info.generadorpanax {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .message-info.compra {
-            background: #e9d8fd;
-            color: #553c9a;
-        }
-
-        .message-info.final {
-            background: #e0e7ff;
-            color: #3730a3;
-        }
-
-        .warning-box {
-            background: #fee2e2;
-            border-left: 4px solid #dc2626;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-            color: #7f1d1d;
-        }
-
-        .warning-box strong {
-            color: #dc2626;
-        }
+        .message-info.comercial { background: #fed7aa; color: #92400e; }
+        .message-info.descarga { background: #bee3f8; color: #2c5282; }
+        .message-info.flujo { background: #fed7e6; color: #97266d; }
+        .message-info.generadorflujo { background: #fef3c7; color: #92400e; }
+        .message-info.generadorpanax { background: #d1fae5; color: #065f46; }
+        .message-info.compra { background: #e9d8fd; color: #553c9a; }
+        .message-info.final { background: #e0e7ff; color: #3730a3; }
 
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .main-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .btn-main {
-                min-width: 100%;
-                padding: 15px 20px;
-                font-size: 1.1em;
-            }
-            
-            .agents-grid, .bancos-grid, .opciones-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
+            .header h1 { font-size: 2em; }
+            .main-buttons { grid-template-columns: 1fr; }
+            .btn-main { min-width: 100%; padding: 15px 20px; font-size: 1.1em; }
+            .agents-grid, .bancos-grid, .opciones-grid { grid-template-columns: 1fr; }
+            .content { padding: 20px; }
+            .action-buttons { flex-direction: column; }
         }
     </style>
 </head>
@@ -682,40 +428,17 @@
         <div class="content">
             <!-- Botones principales -->
             <div class="main-buttons">
-                <button class="btn-main saludo" onclick="toggleAgentsPanel()">
-                    <span>💬</span> SALUDO
-                </button>
-                
-                <button class="btn-main comercial" onclick="mostrarMensajeComercial()">
-                    <span>📊</span> COMERCIAL
-                </button>
-
-                <button class="btn-main descarga" onclick="mostrarMensajeDescargaPanax()">
-                    <span>📱</span> PANAX
-                </button>
-
-                <button class="btn-main flujo" onclick="mostrarMensajeFlujo()">
-                    <span>🔗</span> FLUJO
-                </button>
-
-                <button class="btn-main generadorflujo" onclick="toggleGeneradorFlujoPanel()">
-                    <span>⚙️</span> GEN FLUJO
-                </button>
-
-                <button class="btn-main generadorpanax" onclick="toggleGeneradorPanaxPanel()">
-                    <span>🛠️</span> GEN PANAX
-                </button>
-
-                <button class="btn-main final" onclick="mostrarMensajeFinal()">
-                    <span>🎯</span> FINAL CHAT
-                </button>
-
-                <button class="btn-main compra" onclick="toggleCompraPanel()">
-                    <span>🛒</span> COMPRA
-                </button>
+                <button class="btn-main saludo" onclick="toggleAgentsPanel()"><span>💬</span> SALUDO</button>
+                <button class="btn-main comercial" onclick="mostrarMensajeComercial()"><span>📊</span> COMERCIAL</button>
+                <button class="btn-main descarga" onclick="mostrarMensajeDescargaPanax()"><span>📱</span> PANAX</button>
+                <button class="btn-main flujo" onclick="mostrarMensajeFlujo()"><span>🔗</span> FLUJO</button>
+                <button class="btn-main generadorflujo" onclick="toggleGeneradorFlujoPanel()"><span>⚙️</span> GEN FLUJO</button>
+                <button class="btn-main generadorpanax" onclick="toggleGeneradorPanaxPanel()"><span>🛠️</span> GEN PANAX</button>
+                <button class="btn-main final" onclick="mostrarMensajeFinal()"><span>🎯</span> FINAL CHAT</button>
+                <button class="btn-main compra" onclick="toggleCompraPanel()"><span>🛒</span> COMPRA</button>
             </div>
 
-            <!-- Panel de agentes (oculto inicialmente) -->
+            <!-- Paneles -->
             <div id="agentsPanel" class="agents-panel">
                 <h3>👥 Selecciona un ejecutivo</h3>
                 <div class="agents-grid">
@@ -729,7 +452,6 @@
                 <button class="btn-close" onclick="toggleAgentsPanel()">✕ CERRAR</button>
             </div>
 
-            <!-- Panel de compra (bancos) -->
             <div id="compraPanel" class="compra-panel">
                 <h3>🏦 Selecciona el banco para el pago</h3>
                 <div class="bancos-grid">
@@ -739,7 +461,6 @@
                 <button class="btn-close" onclick="toggleCompraPanel()">✕ CERRAR</button>
             </div>
 
-            <!-- Panel generador FLUJO -->
             <div id="generadorFlujoPanel" class="generadorflujo-panel">
                 <h3>⚙️ GENERADOR DE MENSAJES FLUJO TV</h3>
                 <div class="opciones-grid">
@@ -757,7 +478,6 @@
                 <button class="btn-close" onclick="toggleGeneradorFlujoPanel()">✕ CERRAR</button>
             </div>
 
-            <!-- Panel generador PANAX -->
             <div id="generadorPanaxPanel" class="generadorpanax-panel">
                 <h3>🛠️ GENERADOR DE MENSAJES PANAXTREAMING</h3>
                 <div class="opciones-grid">
@@ -775,7 +495,7 @@
                 <button class="btn-close" onclick="toggleGeneradorPanaxPanel()">✕ CERRAR</button>
             </div>
 
-            <!-- Contenedor del mensaje (visible después de seleccionar opción) -->
+            <!-- Contenedor del mensaje -->
             <div id="messageContainer" class="message-container" style="display: none;">
                 <div class="message-info" id="messageInfo"></div>
                 <div id="messageContent" class="message-content"></div>
@@ -1027,7 +747,7 @@
             toggleGeneradorPanaxPanel();
         }
 
-        // Funciones de utilidad (saludo, comercial, etc.)
+        // Funciones de utilidad
         function obtenerSaludoPorHora() {
             const hora = new Date().getHours();
             if (hora >= 5 && hora < 12) return { saludo: '¡BENDECIDO DÍA PARA TI Y LOS TUYOS!', emoji: '☀️', periodo: 'mañana', texto: 'Buenos días' };
@@ -1095,9 +815,45 @@
             dayMessage.innerHTML = `🛒 COMPRA - ${nombreBanco} <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
+        // *** MENSAJE FINAL DE CHAT CON SALUDO DINÁMICO ***
         function mostrarMensajeFinal() {
             const saludoHora = obtenerSaludoPorHora();
-            mensajeActual = `Gracias por estar hoy acá con nosotros. 🙌✨ ${saludoHora.saludo} 🙏🌈\n\nRECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥\n\n📺 PANTALLAS Y CUENTAS:\n🔹 DISNEY PLUS (Con 7 ESPN y HULU)\n* Pantalla: 3$ BCV 🖥️\n* Cuenta completa (7 perfiles)\n\n🔹 AMAZON PRIME VIDEO\n* Pantalla: 1.5$ 🎥\n\n🔹 MAX PREMIUM\n* Pantalla: 1.6$ 🍿\n\n🔹 PARAMOUNT\n* Pantalla: 1.5$ 🎞️\n\n🔹 CRUNCHYROLL\n* Pantalla: 1.5$ ⛩️\n\n🎧 APLICACIONES MUSICALES:\n\n🎶 SPOTIFY (Cuenta): 4$\n🎬 YOUTUBE PREMIUM (Cuenta): 4.5$\n\n🎨 APLICACIONES DE DISEÑO:\n\n🖌️ CANVA PRO (Con tu correo): 1$\n🗓️ CANVA PRO (Un año): 10$\n🎬 CAPCUT PRO (Un mes): 3.5$\n🤖 CHAT GPT: 6$\n\n🎮 RECARGAS DE JUEGOS:\n* FREE FIRE y más... 🔥💎`;
+            mensajeActual = `Gracias por estar hoy acá con nosotros. 🙌✨ ${saludoHora.saludo} 🙏🌈
+
+RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
+
+🎧 APLICACIONES MUSICALES:
+
+🎶 SPOTIFY (Cuenta): 4$
+🎬 YOUTUBE PREMIUM (Cuenta): 4.5$
+
+🎨 APLICACIONES DE DISEÑO:
+
+🖌️ CANVA PRO (Con tu correo): 1$
+🗓️ CANVA PRO (Un año): 10$
+🎬 CAPCUT PRO (Un mes): 3.5$
+🤖 CHAT GPT: 6$
+
+📺 PANTALLAS Y CUENTAS:
+🔹 DISNEY PLUS (Con 7 ESPN y HULU)
+ Pantalla: 4$ BCV 🖥️
+ Cuenta completa (7 perfiles): 20$
+
+🔹 AMAZON PRIME VIDEO
+ Pantalla: 1.5$ 🎥
+
+🔹 MAX PREMIUM
+ Pantalla: 1.6$ 🍿
+
+🔹 PARAMOUNT
+ Pantalla: 1.5$ 🎞️
+
+🔹 CRUNCHYROLL
+ Pantalla: 1.5$ ⛩️
+
+🎮 RECARGAS DE JUEGOS:
+* FREE FIRE y más... 🔥💎`;
+
             mostrarMensajeEnPantalla('🎯 MENSAJE FINAL DE CHAT', mensajeActual, 'final');
             const dayMessage = document.getElementById('dayMessage');
             const saludoDia = obtenerSaludoDiaSemana();
