@@ -107,14 +107,6 @@
         .btn-main.final { background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%); }
         .btn-main.compra { background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%); }
         .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
-        .btn-main.saludo:hover { background: linear-gradient(135deg, #128C7E 0%, #075E54 100%); }
-        .btn-main.comercial:hover { background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); }
-        .btn-main.descarga:hover { background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%); }
-        .btn-main.flujo:hover { background: linear-gradient(135deg, #d53f8c 0%, #97266d 100%); }
-        .btn-main.generadorflujo:hover { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .btn-main.generadorpanax:hover { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
-        .btn-main.final:hover { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
-        .btn-main.compra:hover { background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%); }
 
         /* Paneles */
         .agents-panel, .compra-panel, .generadorflujo-panel, .generadorpanax-panel {
@@ -146,6 +138,10 @@
             gap: 15px;
             margin-bottom: 20px;
         }
+        .btn-agent, .btn-banco, .btn-opcion, .btn-comercial-opcion {
+            position: relative;
+            transition: all 0.3s ease;
+        }
         .btn-agent {
             padding: 15px 20px;
             border: none;
@@ -153,7 +149,6 @@
             font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -163,6 +158,7 @@
             gap: 10px;
         }
         .btn-agent:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); }
+        
         .btn-close {
             background: #e53e3e;
             color: white;
@@ -186,7 +182,6 @@
             font-size: 1.1em;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
             color: white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
@@ -202,6 +197,52 @@
         .btn-opcion:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .btn-opcion span { font-size: 2em; }
 
+        /* Sección comercial con botones fijos */
+        .comercial-section {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            display: none;
+        }
+        .comercial-section.visible {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+        .comercial-section h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .comercial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .btn-comercial-opcion {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-comercial-opcion.panax { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .btn-comercial-opcion.stella { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
+        .btn-comercial-opcion.flujo { background: linear-gradient(135deg, #f687b3 0%, #d53f8c 100%); }
+        .btn-comercial-opcion:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+
         /* Panel de compra (bancos) */
         .bancos-grid .btn-banco {
             padding: 20px;
@@ -210,7 +251,6 @@
             font-size: 1.2em;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
             color: white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
@@ -223,6 +263,44 @@
         .btn-banco.mercantil { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
         .btn-banco:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .btn-banco span { font-size: 2em; }
+
+        /* ESTILOS PARA BOTÓN COPIADO */
+        .btn-copied {
+            position: relative;
+            opacity: 0.85;
+            transform: scale(0.98);
+            transition: all 0.2s ease;
+        }
+        .btn-copied::after {
+            content: "✓ COPIADO";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            font-size: 0.7em;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        /* Para botones con diseño de columna (los de generadores) */
+        .btn-opcion.btn-copied::after {
+            bottom: -5px;
+            font-size: 0.65em;
+            padding: 2px 8px;
+        }
+        
+        /* Para botones de banco */
+        .btn-banco.btn-copied::after {
+            bottom: -8px;
+            font-size: 0.65em;
+            padding: 2px 10px;
+        }
 
         /* Formulario de datos */
         .datos-form {
@@ -408,9 +486,10 @@
             .header h1 { font-size: 2em; }
             .main-buttons { grid-template-columns: 1fr; }
             .btn-main { min-width: 100%; padding: 15px 20px; font-size: 1.1em; }
-            .agents-grid, .bancos-grid, .opciones-grid { grid-template-columns: 1fr; }
+            .agents-grid, .bancos-grid, .opciones-grid, .comercial-grid { grid-template-columns: 1fr; }
             .content { padding: 20px; }
             .action-buttons { flex-direction: column; }
+            .btn-copied::after { font-size: 0.6em; padding: 2px 6px; bottom: -6px; }
         }
     </style>
 </head>
@@ -429,7 +508,7 @@
             <!-- Botones principales -->
             <div class="main-buttons">
                 <button class="btn-main saludo" onclick="toggleAgentsPanel()"><span>💬</span> SALUDO</button>
-                <button class="btn-main comercial" onclick="mostrarMensajeComercial()"><span>📊</span> COMERCIAL</button>
+                <button class="btn-main comercial" onclick="toggleComercialSection()"><span>📊</span> COMERCIAL</button>
                 <button class="btn-main descarga" onclick="mostrarMensajeDescargaPanax()"><span>📱</span> PANAX</button>
                 <button class="btn-main flujo" onclick="mostrarMensajeFlujo()"><span>🔗</span> FLUJO</button>
                 <button class="btn-main generadorflujo" onclick="toggleGeneradorFlujoPanel()"><span>⚙️</span> GEN FLUJO</button>
@@ -438,36 +517,49 @@
                 <button class="btn-main compra" onclick="toggleCompraPanel()"><span>🛒</span> COMPRA</button>
             </div>
 
-            <!-- Paneles -->
+            <!-- Sección comercial con botones fijos -->
+            <div id="comercialSection" class="comercial-section">
+                <h3>📊 SELECCIONA UNA PLATAFORMA</h3>
+                <div class="comercial-grid">
+                    <button id="btnPanax" class="btn-comercial-opcion panax" onclick="mostrarMensajeComercialPanax()"><span>🔥</span> PANAXTREAMING</button>
+                    <button id="btnStella" class="btn-comercial-opcion stella" onclick="mostrarMensajeComercialStella()"><span>✨</span> STELLA TV</button>
+                    <button id="btnFlujoPremium" class="btn-comercial-opcion flujo" onclick="mostrarMensajeComercialFlujoPremium()"><span>💎</span> FLUJO TV PREMIUM</button>
+                </div>
+                <button class="btn-close" onclick="toggleComercialSection()">✕ CERRAR</button>
+            </div>
+
+            <!-- Panel de agentes -->
             <div id="agentsPanel" class="agents-panel">
                 <h3>👥 Selecciona un ejecutivo</h3>
                 <div class="agents-grid">
-                    <button class="btn-agent" onclick="generarMensajeSaludo('ANGEL DUGARTE'); toggleAgentsPanel()"><span>👤</span> ANGEL DUGARTE</button>
-                    <button class="btn-agent" onclick="generarMensajeSaludo('RICARDO DUGARTE'); toggleAgentsPanel()"><span>👤</span> RICARDO DUGARTE</button>
-                    <button class="btn-agent" onclick="generarMensajeSaludo('THANY BRICEÑO'); toggleAgentsPanel()"><span>👤</span> THANY BRICEÑO</button>
-                    <button class="btn-agent" onclick="generarMensajeSaludo('CARLOS ZAMBRANO'); toggleAgentsPanel()"><span>👤</span> CARLOS ZAMBRANO</button>
-                    <button class="btn-agent" onclick="generarMensajeSaludo('MARIA RIVAS'); toggleAgentsPanel()"><span>👤</span> MARIA RIVAS</button>
-                    <button class="btn-agent" onclick="generarMensajeSaludo('JOSE ALTUVE'); toggleAgentsPanel()"><span>👤</span> JOSE ALTUVE</button>
+                    <button id="btnAngel" class="btn-agent" onclick="generarMensajeSaludo('ANGEL DUGARTE'); toggleAgentsPanel()"><span>👤</span> ANGEL DUGARTE</button>
+                    <button id="btnRicardo" class="btn-agent" onclick="generarMensajeSaludo('RICARDO DUGARTE'); toggleAgentsPanel()"><span>👤</span> RICARDO DUGARTE</button>
+                    <button id="btnThany" class="btn-agent" onclick="generarMensajeSaludo('THANY BRICEÑO'); toggleAgentsPanel()"><span>👤</span> THANY BRICEÑO</button>
+                    <button id="btnCarlos" class="btn-agent" onclick="generarMensajeSaludo('CARLOS ZAMBRANO'); toggleAgentsPanel()"><span>👤</span> CARLOS ZAMBRANO</button>
+                    <button id="btnMaria" class="btn-agent" onclick="generarMensajeSaludo('MARIA RIVAS'); toggleAgentsPanel()"><span>👤</span> MARIA RIVAS</button>
+                    <button id="btnJose" class="btn-agent" onclick="generarMensajeSaludo('JOSE ALTUVE'); toggleAgentsPanel()"><span>👤</span> JOSE ALTUVE</button>
                 </div>
                 <button class="btn-close" onclick="toggleAgentsPanel()">✕ CERRAR</button>
             </div>
 
+            <!-- Panel de compra -->
             <div id="compraPanel" class="compra-panel">
                 <h3>🏦 Selecciona el banco para el pago</h3>
                 <div class="bancos-grid">
-                    <button class="btn-banco venezuela" onclick="mostrarMensajeCompra('VENEZUELA'); toggleCompraPanel()"><span>🏦</span> BANCO DE VENEZUELA</button>
-                    <button class="btn-banco mercantil" onclick="mostrarMensajeCompra('MERCANTIL'); toggleCompraPanel()"><span>🏦</span> BANCO MERCANTIL</button>
+                    <button id="btnVenezuela" class="btn-banco venezuela" onclick="mostrarMensajeCompra('VENEZUELA'); toggleCompraPanel()"><span>🏦</span> BANCO DE VENEZUELA</button>
+                    <button id="btnMercantil" class="btn-banco mercantil" onclick="mostrarMensajeCompra('MERCANTIL'); toggleCompraPanel()"><span>🏦</span> BANCO MERCANTIL</button>
                 </div>
                 <button class="btn-close" onclick="toggleCompraPanel()">✕ CERRAR</button>
             </div>
 
+            <!-- Panel generador FLUJO -->
             <div id="generadorFlujoPanel" class="generadorflujo-panel">
                 <h3>⚙️ GENERADOR DE MENSAJES FLUJO TV</h3>
                 <div class="opciones-grid">
-                    <button class="btn-opcion demo" onclick="mostrarFormularioFlujoDemo()"><span>🕐</span> DEMO FLUJO</button>
-                    <button class="btn-opcion pantalla" onclick="mostrarFormularioFlujoPantalla()"><span>📱</span> PANTALLA FLUJO</button>
-                    <button class="btn-opcion cuenta" onclick="mostrarFormularioFlujoCuenta()"><span>👥</span> CUENTA FLUJO</button>
-                    <button class="btn-opcion renovacion" onclick="mostrarFormularioFlujoRenovacion()"><span>🔄</span> RENOVACIÓN FLUJO</button>
+                    <button id="btnFlujoDemo" class="btn-opcion demo" onclick="mostrarFormularioFlujoDemo()"><span>🕐</span> DEMO FLUJO</button>
+                    <button id="btnFlujoPantalla" class="btn-opcion pantalla" onclick="mostrarFormularioFlujoPantalla()"><span>📱</span> PANTALLA FLUJO</button>
+                    <button id="btnFlujoCuenta" class="btn-opcion cuenta" onclick="mostrarFormularioFlujoCuenta()"><span>👥</span> CUENTA FLUJO</button>
+                    <button id="btnFlujoRenovacion" class="btn-opcion renovacion" onclick="mostrarFormularioFlujoRenovacion()"><span>🔄</span> RENOVACIÓN FLUJO</button>
                 </div>
                 <div id="formularioFlujoDatos" class="datos-form" style="display: none;">
                     <h4 id="formFlujoTitulo" style="text-align:center; margin-bottom:20px; color:#4a5568;"></h4>
@@ -478,13 +570,14 @@
                 <button class="btn-close" onclick="toggleGeneradorFlujoPanel()">✕ CERRAR</button>
             </div>
 
+            <!-- Panel generador PANAX -->
             <div id="generadorPanaxPanel" class="generadorpanax-panel">
                 <h3>🛠️ GENERADOR DE MENSAJES PANAXTREAMING</h3>
                 <div class="opciones-grid">
-                    <button class="btn-opcion demo" onclick="mostrarFormularioPanaxDemo()"><span>🕐</span> DEMO PANAX</button>
-                    <button class="btn-opcion pantalla" onclick="mostrarFormularioPanaxPantalla()"><span>📱</span> PANTALLA PANAX</button>
-                    <button class="btn-opcion cuenta" onclick="mostrarFormularioPanaxCuenta()"><span>👥</span> CUENTA PANAX</button>
-                    <button class="btn-opcion renovacion" onclick="mostrarFormularioPanaxRenovacion()"><span>🔄</span> RENOVACIÓN PANAX</button>
+                    <button id="btnPanaxDemo" class="btn-opcion demo" onclick="mostrarFormularioPanaxDemo()"><span>🕐</span> DEMO PANAX</button>
+                    <button id="btnPanaxPantalla" class="btn-opcion pantalla" onclick="mostrarFormularioPanaxPantalla()"><span>📱</span> PANTALLA PANAX</button>
+                    <button id="btnPanaxCuenta" class="btn-opcion cuenta" onclick="mostrarFormularioPanaxCuenta()"><span>👥</span> CUENTA PANAX</button>
+                    <button id="btnPanaxRenovacion" class="btn-opcion renovacion" onclick="mostrarFormularioPanaxRenovacion()"><span>🔄</span> RENOVACIÓN PANAX</button>
                 </div>
                 <div id="formularioPanaxDatos" class="datos-form" style="display: none;">
                     <h4 id="formPanaxTitulo" style="text-align:center; margin-bottom:20px; color:#4a5568;"></h4>
@@ -500,7 +593,7 @@
                 <div class="message-info" id="messageInfo"></div>
                 <div id="messageContent" class="message-content"></div>
                 <div class="action-buttons">
-                    <button class="btn-copy" onclick="copiarMensaje()"><span>📋</span> COPIAR MENSAJE</button>
+                    <button id="btnCopyMessage" class="btn-copy" onclick=""><span>📋</span> COPIAR MENSAJE</button>
                     <button class="btn-wsp" onclick="abrirWhatsApp()"><span>📱</span> WhatsApp</button>
                 </div>
             </div>
@@ -515,6 +608,89 @@
         let mensajeActual = '';
         let tipoFlujoActual = '';
         let tipoPanaxActual = '';
+        let botonActual = null;
+
+        // Función para marcar un botón como copiado
+        function marcarBotonCopiado(botonId) {
+            // Remover clase de todos los botones
+            document.querySelectorAll('.btn-copied').forEach(btn => {
+                btn.classList.remove('btn-copied');
+            });
+            
+            // Marcar el nuevo botón
+            if (botonId) {
+                const btn = document.getElementById(botonId);
+                if (btn) {
+                    btn.classList.add('btn-copied');
+                    // Auto-remover la marca después de 2.5 segundos
+                    setTimeout(() => {
+                        if (btn) btn.classList.remove('btn-copied');
+                    }, 2500);
+                }
+            }
+        }
+
+        // Función para manejar el copiado con marca visual
+        function copiarMensajeConMarca() {
+            if (!mensajeActual) {
+                mostrarNotificacion('⚠️ Por favor, genera un mensaje primero', 'error');
+                return false;
+            }
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(mensajeActual).then(() => {
+                    mostrarNotificacion('✅ Mensaje copiado al portapapeles', 'success');
+                    if (botonActual) {
+                        marcarBotonCopiado(botonActual);
+                    }
+                }).catch(err => {
+                    console.error('Error al copiar: ', err);
+                    fallbackCopiarMensaje();
+                });
+            } else {
+                fallbackCopiarMensaje();
+            }
+            return true;
+        }
+
+        function fallbackCopiarMensaje() {
+            const textarea = document.createElement('textarea');
+            textarea.value = mensajeActual;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            try {
+                if (document.execCommand('copy')) {
+                    mostrarNotificacion('✅ Mensaje copiado al portapapeles', 'success');
+                    if (botonActual) {
+                        marcarBotonCopiado(botonActual);
+                    }
+                } else {
+                    mostrarNotificacion('❌ Error al copiar el mensaje', 'error');
+                }
+            } catch (err) {
+                mostrarNotificacion('❌ No se pudo copiar el mensaje', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Función para mostrar mensaje y configurar el botón de copiar
+        function mostrarMensajeConCopia(info, mensaje, tipo, botonId) {
+            mensajeActual = mensaje;
+            botonActual = botonId;
+            mostrarMensajeEnPantalla(info, mensajeActual, tipo);
+            
+            // Configurar el botón de copiar
+            const btnCopy = document.getElementById('btnCopyMessage');
+            if (btnCopy) {
+                const nuevoBtn = btnCopy.cloneNode(true);
+                btnCopy.parentNode.replaceChild(nuevoBtn, btnCopy);
+                nuevoBtn.id = 'btnCopyMessage';
+                nuevoBtn.onclick = () => copiarMensajeConMarca();
+            }
+        }
 
         // Funciones para paneles
         function toggleAgentsPanel() {
@@ -523,6 +699,7 @@
             document.getElementById('compraPanel').classList.remove('visible');
             document.getElementById('generadorFlujoPanel').classList.remove('visible');
             document.getElementById('generadorPanaxPanel').classList.remove('visible');
+            document.getElementById('comercialSection').classList.remove('visible');
             if (panel.classList.contains('visible')) {
                 setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
             }
@@ -534,6 +711,7 @@
             document.getElementById('agentsPanel').classList.remove('visible');
             document.getElementById('generadorFlujoPanel').classList.remove('visible');
             document.getElementById('generadorPanaxPanel').classList.remove('visible');
+            document.getElementById('comercialSection').classList.remove('visible');
             if (panel.classList.contains('visible')) {
                 setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
             }
@@ -545,6 +723,7 @@
             document.getElementById('agentsPanel').classList.remove('visible');
             document.getElementById('compraPanel').classList.remove('visible');
             document.getElementById('generadorPanaxPanel').classList.remove('visible');
+            document.getElementById('comercialSection').classList.remove('visible');
             if (!panel.classList.contains('visible')) {
                 document.getElementById('formularioFlujoDatos').style.display = 'none';
             }
@@ -559,6 +738,7 @@
             document.getElementById('agentsPanel').classList.remove('visible');
             document.getElementById('compraPanel').classList.remove('visible');
             document.getElementById('generadorFlujoPanel').classList.remove('visible');
+            document.getElementById('comercialSection').classList.remove('visible');
             if (!panel.classList.contains('visible')) {
                 document.getElementById('formularioPanaxDatos').style.display = 'none';
             }
@@ -567,7 +747,193 @@
             }
         }
 
-        // Funciones para FLUJO
+        function toggleComercialSection() {
+            const section = document.getElementById('comercialSection');
+            section.classList.toggle('visible');
+            document.getElementById('agentsPanel').classList.remove('visible');
+            document.getElementById('compraPanel').classList.remove('visible');
+            document.getElementById('generadorFlujoPanel').classList.remove('visible');
+            document.getElementById('generadorPanaxPanel').classList.remove('visible');
+            if (section.classList.contains('visible')) {
+                setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+            }
+        }
+
+        // Mensajes comerciales
+        function mostrarMensajeComercialPanax() {
+            const mensaje = `🔥 *PANAXTREAMING TV GO* 🔥
+🇻🇪 *ORGULLOSAMENTE VENEZOLANA COMO TÚ* 🇻🇪
+
+👉 *+1500 Canales en Vivo* (Nacionales e Internacionales 🌎)
+👉 *Lo mejor del Deporte:* ESPN 🎾, Fox Sports 🏎️, DSports ⚽.
+👉 *Tus plataformas favoritas:* Netflix, Amazon, Disney, Max y Crunchyroll 🎥🍿.
+
+📊 *NUESTRAS TARIFAS (30 DÍAS):*
+✅ Por Pantalla: 3$
+✅ Cuenta Completa (4 Disp. Simultáneos): 7.5$
+📌 A tasa BCV del día.
+
+✨ *ESTABILIDAD EN PELÍCULAS Y SERIES GARANTIZADA* ✨
+
+🎁 *¡SOLICITA TU DEMO DE 6 HORAS!* 🎁
+Disfruta en tu TELEFONO Android, Fire TV, Smart TV, Roku o PC. ¡Pruébala ya! 🚀`;
+            
+            mostrarMensajeConCopia('📊 PANAXTREAMING - COMERCIAL', mensaje, 'comercial', 'btnPanax');
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📊 PANAXTREAMING <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeComercialStella() {
+            const mensaje = `🔥 *STELLA TV* 🔥
+¡El entretenimiento que buscabas en un solo lugar!
+
+👉 *+1800 Canales en Vivo* (Nacionales e Internacionales 🌎)
+👉 *Especialistas en Deporte:* Disfruta de todos los canales de ESPN, Fox Sports y DSports.
+✨ *ESTABILIDAD EN CANALES DEPORTIVOS GARANTIZADA* ✨
+
+🎥 *TU STREAMING FAVORITO:*
+Contenido organizado y separado por carpetas:
+✅ Netflix | ✅ Disney Plus | ✅ Amazon Prime | ✅ Apple TV
+
+📊 *TARIFAS (30 DÍAS):*
+✅ Por Pantalla: 5$
+✅ Cuenta Completa (3 Disp. Simultáneos): 12$
+📌 A tasa BCV del día.
+
+🎁 *¡SOLICITA TU PRUEBA DE 2 HORAS GRATIS!* 🎁
+Disponible para Android, Fire TV, Smart TV o PC. ¡Pruébala ya! 🚀`;
+            
+            mostrarMensajeConCopia('📊 STELLA TV - COMERCIAL', mensaje, 'comercial', 'btnStella');
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📊 STELLA TV <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeComercialFlujoPremium() {
+            const mensaje = `🔥 *FLUJO TV PREMIUM* 🔥
+¡El entretenimiento que buscabas en un solo lugar!
+
+👉 *+2000 Canales en Vivo* (Nacionales e Internacionales 🌎)
+👉 *Especialistas en Deporte:* Disfruta de todos los canales de ESPN, Fox Sports y DSports.
+✨ *ESTABILIDAD EN CANALES DEPORTIVOS GARANTIZADA* ✨
+
+🎥 *TU STREAMING FAVORITO (+18.000 Películas y Series):*
+Contenido de Netflix, Amazon, Disney+ y todos los canales Premium como HBO y Cinecanal.
+
+📊 *TARIFAS (30 DÍAS):*
+✅ Por Pantalla: 4$
+✅ Cuenta Completa (3 Disp. Simultáneos): 8.5$
+📌 A tasa BCV del día.
+
+🎁 *¡SOLICITA TU PRUEBA DE 3 HORAS GRATIS!* 🎁
+Disponible para Android, Fire TV, Smart TV o PC. ¡Pruébala ya! 🚀`;
+            
+            mostrarMensajeConCopia('📊 FLUJO TV PREMIUM - COMERCIAL', mensaje, 'comercial', 'btnFlujoPremium');
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📊 FLUJO TV PREMIUM <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        // Generador de mensajes saludo
+        function generarMensajeSaludo(ejecutivo) {
+            const saludoHora = obtenerSaludoPorHora();
+            const saludoDia = obtenerSaludoDiaSemana();
+            const mensajeSaludoDia = saludoDia.saludo ? ` ${saludoDia.saludo}` : '';
+            const mensaje = `${saludoHora.saludo}${mensajeSaludoDia} ${saludoHora.emoji} Desde *PANAXTREAMING*, tu plataforma de entretenimiento, le escribe *${ejecutivo}*, Ejecutivo de Atención al Usuario de *PANAXTREAMING TV GO*. 🤝\n\nOfrecemos disculpas por la demora en responder su mensaje; debido al alto número de chats, el suyo es superimportante para nosotros. 📈✨\n\n_Tendré el gusto de atenderle en este día._ 👨‍💻🎬`;
+            
+            let botonId = '';
+            if (ejecutivo === 'ANGEL DUGARTE') botonId = 'btnAngel';
+            else if (ejecutivo === 'RICARDO DUGARTE') botonId = 'btnRicardo';
+            else if (ejecutivo === 'THANY BRICEÑO') botonId = 'btnThany';
+            else if (ejecutivo === 'CARLOS ZAMBRANO') botonId = 'btnCarlos';
+            else if (ejecutivo === 'MARIA RIVAS') botonId = 'btnMaria';
+            else if (ejecutivo === 'JOSE ALTUVE') botonId = 'btnJose';
+            
+            mostrarMensajeConCopia(`💬 Mensaje de saludo - Ejecutivo: ${ejecutivo} (${saludoHora.texto})`, mensaje, 'saludo', botonId);
+            const dayMessage = document.getElementById('dayMessage');
+            dayMessage.innerHTML = `💬 Mensaje de saludo para: <strong>${ejecutivo}</strong> <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        // Mensaje compra
+        function mostrarMensajeCompra(banco) {
+            const nombreBanco = banco === 'VENEZUELA' ? 'Banco de Venezuela' : 'Banco Mercantil';
+            const mensaje = `*Para procesar su pedido y registrar el servicio, por favor envíenos los siguientes datos:*\n\n👤 *Nombre y Apellido:*\n📞 *Teléfono de contacto:*\n📧 *Correo electrónico:*\n🆔 *Cédula:*\n\n💳 *DATOS PARA EL PAGO MÓVIL:*\n🏦 *Banco:* ${nombreBanco}\n🆔 *Cédula:* 13.967.475\n📱 *Teléfono:* 0412-0754787\n\n📧 *A su correo electrónico llegará el comprobante de su compra* 🧾 *y las futuras renovaciones del servicio* 🔄\n\n✨ *¡Muchas gracias por su confianza!* ✨`;
+            
+            const botonId = banco === 'VENEZUELA' ? 'btnVenezuela' : 'btnMercantil';
+            mostrarMensajeConCopia(`🛒 SOLICITUD DE COMPRA - ${nombreBanco}`, mensaje, 'compra', botonId);
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `🛒 COMPRA - ${nombreBanco} <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        // Mensajes descarga y links
+        function mostrarMensajeDescargaPanax() {
+            const mensaje = `*TODO EL ENTRETENIMIENTO EN TUS MANOS CON PANAXTREAMING EN TU MOVIL*\n\nDescarga Mobile _*HAGA CLICK AQUI PARA DESCARGAR PANAXTREAMING EN SU TELEFONO ANDROID*_\n\nhttps://telesatstreaming.com/Pana/PANAXTREAMING.apk`;
+            mostrarMensajeConCopia('📱 DESCARGA PANAX - ANDROID', mensaje, 'descarga', null);
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📱 DESCARGA PANAX <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeFlujo() {
+            const mensaje = `DISFRUTA TODO EL CONTENIDO EN VIVO CON LA MÁXIMA CALIDAD CON FLUJOTV\nVersión 8.2.9.\n\n*Link de descarga para teléfono móvil Android*\nhttps://bitcc.net/flujo-tv-v829\n\nhttp://aftv.news/2918527\n\nDownloader (puede usar cualquiera de los dos)：\n✅ 2918527\n✅ 1009577`;
+            mostrarMensajeConCopia('🔗 LINKS FLUJO TV', mensaje, 'flujo', null);
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `🔗 LINKS FLUJO <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeFinal() {
+            const saludoHora = obtenerSaludoPorHora();
+            const mensaje = `Gracias por estar hoy acá con nosotros. 🙌✨ ${saludoHora.saludo} 🙏🌈
+
+RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
+
+🎧 APLICACIONES MUSICALES:
+
+🎶 SPOTIFY (Cuenta): 4$
+🎬 YOUTUBE PREMIUM (Cuenta): 4.5$
+
+🎨 APLICACIONES DE DISEÑO:
+
+🖌️ CANVA PRO (Con tu correo): 1$
+🗓️ CANVA PRO (Un año): 10$
+🎬 CAPCUT PRO (Un mes): 3.5$
+🤖 CHAT GPT: 6$
+
+📺 PANTALLAS Y CUENTAS:
+🔹 DISNEY PLUS (Con 7 ESPN y HULU)
+ Pantalla: 4$ BCV 🖥️
+ Cuenta completa (7 perfiles): 20$
+
+🔹 AMAZON PRIME VIDEO
+ Pantalla: 1.5$ 🎥
+
+🔹 MAX PREMIUM
+ Pantalla: 1.6$ 🍿
+
+🔹 PARAMOUNT
+ Pantalla: 1.5$ 🎞️
+
+🔹 CRUNCHYROLL
+ Pantalla: 1.5$ ⛩️
+
+🎮 RECARGAS DE JUEGOS:
+* FREE FIRE y más... 🔥💎`;
+            mostrarMensajeConCopia('🎯 MENSAJE FINAL DE CHAT', mensaje, 'final', null);
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            dayMessage.innerHTML = `🎯 MENSAJE FINAL DE CHAT <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        // Funciones para generadores FLUJO
         function mostrarFormularioFlujoDemo() {
             tipoFlujoActual = 'demo';
             document.getElementById('formFlujoTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO FLUJO TV';
@@ -621,34 +987,38 @@
             const horaStr = fecha.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
             let mensaje = '';
             let tipoTexto = '';
+            let botonId = '';
             
             if (tipoFlujoActual === 'demo') {
                 const fechaVencimiento = new Date(fecha.getTime() + 3 * 60 * 60 * 1000);
                 const horaVenceStr = fechaVencimiento.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
                 mensaje = `*📺 DATOS DE SU DEMO FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVenceStr} (3 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'DEMO';
+                botonId = 'btnFlujoDemo';
             } else if (tipoFlujoActual === 'pantalla') {
                 const fechaVencimiento = new Date(fecha);
                 fechaVencimiento.setDate(fecha.getDate() + 30);
                 const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
                 mensaje = `*📺 DATOS DE SU PANTALLA FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 Prohibido usar la cuenta en más de 1 dispositivo\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'PANTALLA';
+                botonId = 'btnFlujoPantalla';
             } else if (tipoFlujoActual === 'cuenta') {
                 const fechaVencimiento = new Date(fecha);
                 fechaVencimiento.setDate(fecha.getDate() + 30);
                 const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
                 mensaje = `*📺 DATOS DE SU CUENTA FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 La cuenta puede usarse en 3 dispositivos simultáneos\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'CUENTA';
+                botonId = 'btnFlujoCuenta';
             } else if (tipoFlujoActual === 'renovacion') {
                 const fechaVencimiento = new Date(fecha);
                 fechaVencimiento.setDate(fecha.getDate() + 30);
                 const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
                 mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'RENOVACIÓN';
+                botonId = 'btnFlujoRenovacion';
             }
             
-            mensajeActual = mensaje;
-            mostrarMensajeEnPantalla(`⚙️ GENERADOR FLUJO - ${tipoTexto}`, mensajeActual, 'generadorflujo');
+            mostrarMensajeConCopia(`⚙️ GENERADOR FLUJO - ${tipoTexto}`, mensaje, 'generadorflujo', botonId);
             const dayMessage = document.getElementById('dayMessage');
             const saludoDia = obtenerSaludoDiaSemana();
             const saludoHora = obtenerSaludoPorHora();
@@ -657,7 +1027,7 @@
             toggleGeneradorFlujoPanel();
         }
 
-        // Funciones para PANAX
+        // Funciones para generadores PANAX
         function mostrarFormularioPanaxDemo() {
             tipoPanaxActual = 'demo';
             document.getElementById('formPanaxTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO PANAXTREAMING';
@@ -711,34 +1081,38 @@
             const horaStr = fecha.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
             let mensaje = '';
             let tipoTexto = '';
+            let botonId = '';
             
             if (tipoPanaxActual === 'demo') {
                 const fechaVencimiento = new Date(fecha.getTime() + 12 * 60 * 60 * 1000);
                 const horaVenceStr = fechaVencimiento.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
                 mensaje = `*📺 DATOS DE SU DEMO PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVenceStr} (12 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'DEMO';
+                botonId = 'btnPanaxDemo';
             } else if (tipoPanaxActual === 'pantalla') {
                 const fechaVencimiento = new Date(fecha);
                 fechaVencimiento.setDate(fecha.getDate() + 30);
                 const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
                 mensaje = `*📺 DATOS DE SU PANTALLA PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'PANTALLA';
+                botonId = 'btnPanaxPantalla';
             } else if (tipoPanaxActual === 'cuenta') {
                 const fechaVencimiento = new Date(fecha);
                 fechaVencimiento.setDate(fecha.getDate() + 30);
                 const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
                 mensaje = `*📺 DATOS DE SU CUENTA PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'CUENTA';
+                botonId = 'btnPanaxCuenta';
             } else if (tipoPanaxActual === 'renovacion') {
                 const fechaVencimiento = new Date(fecha);
                 fechaVencimiento.setDate(fecha.getDate() + 30);
                 const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
                 mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'RENOVACIÓN';
+                botonId = 'btnPanaxRenovacion';
             }
             
-            mensajeActual = mensaje;
-            mostrarMensajeEnPantalla(`🛠️ GENERADOR PANAX - ${tipoTexto}`, mensajeActual, 'generadorpanax');
+            mostrarMensajeConCopia(`🛠️ GENERADOR PANAX - ${tipoTexto}`, mensaje, 'generadorpanax', botonId);
             const dayMessage = document.getElementById('dayMessage');
             const saludoDia = obtenerSaludoDiaSemana();
             const saludoHora = obtenerSaludoPorHora();
@@ -768,98 +1142,6 @@
             return { saludo: saludoAdicional, clase: claseDia, dia: diaMayuscula };
         }
 
-        function generarMensajeSaludo(ejecutivo) {
-            const saludoHora = obtenerSaludoPorHora();
-            const saludoDia = obtenerSaludoDiaSemana();
-            const mensajeSaludoDia = saludoDia.saludo ? ` ${saludoDia.saludo}` : '';
-            mensajeActual = `${saludoHora.saludo}${mensajeSaludoDia} ${saludoHora.emoji} Desde *PANAXTREAMING*, tu plataforma de entretenimiento, le escribe *${ejecutivo}*, Ejecutivo de Atención al Usuario de *PANAXTREAMING TV GO*. 🤝\n\nOfrecemos disculpas por la demora en responder su mensaje; debido al alto número de chats, el suyo es superimportante para nosotros. 📈✨\n\n_Tendré el gusto de atenderle en este día._ 👨‍💻🎬`;
-            mostrarMensajeEnPantalla(`💬 Mensaje de saludo - Ejecutivo: ${ejecutivo} (${saludoHora.texto})`, mensajeActual, 'saludo');
-            const dayMessage = document.getElementById('dayMessage');
-            dayMessage.innerHTML = `💬 Mensaje de saludo para: <strong>${ejecutivo}</strong> <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
-
-        function mostrarMensajeComercial() {
-            mensajeActual = `✨ *SALUDOS Y BENDICIONES DESDE PANAXTREAMING PARA USTED Y SU FAMILIA* ✨\n\n🤝 Nos gustaría que probara nuestra plataforma PANAXTREAMING por 12 horas GRATIS, solo díganos en qué equipo lo usará y le ayudamos con la instalación. 🛠️💻\n\n📺 También un demo de FLUJO TV POR 3 HORAS 🕒\n\n*TU ELIGES CUAL QUIERES, RECUERDA TAMBIEN PUEDES GANAR DINERO EXTRA SI TE CONVIERTES EN NUESTRO DISTRIBUIDOR AUTOIZADO*\n\n⚡ AMBAS PLATAFORMAS TE OFRECEN MAS DE 1500 CANALES DE NOTICIAS, MUSICA PELICULAS Y DEPORTES PREMIUM ESPN, FOX SPORT, DIRECTV SPORT Y MÁS DE 60 CANALES DEPORTIVOS Y MÁS DE 15.000 PELÍCULAS Y SERIES EN ESTRENO Y CLÁSICAS ⚽🎬🍿\n\n🔥 *Puedes adquirir Panaxtreaming al super precio de 3$ a tasa de BCV o FlujoTV por solo 4$. Si lo prefieres llévate el super combo de las dos por solo 5.5$* 💸💎\n\nADEMAS PODRAS DESCARGAR PARA VER SIN CONEXION A INTERNET DESDE NUESTRA WEB`;
-            mostrarMensajeEnPantalla('📊 MENSAJE DE COMERCIALIZACIÓN', mensajeActual, 'comercial');
-            const dayMessage = document.getElementById('dayMessage');
-            const saludoDia = obtenerSaludoDiaSemana();
-            const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `📊 COMERCIALIZACIÓN <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
-
-        function mostrarMensajeDescargaPanax() {
-            mensajeActual = `*TODO EL ENTRETENIMIENTO EN TUS MANOS CON PANAXTREAMING EN TU MOVIL*\n\nDescarga Mobile _*HAGA CLICK AQUI PARA DESCARGAR PANAXTREAMING EN SU TELEFONO ANDROID*_\n\nhttps://telesatstreaming.com/Pana/PANAXTREAMING.apk`;
-            mostrarMensajeEnPantalla('📱 DESCARGA PANAX - ANDROID', mensajeActual, 'descarga');
-            const dayMessage = document.getElementById('dayMessage');
-            const saludoDia = obtenerSaludoDiaSemana();
-            const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `📱 DESCARGA PANAX <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
-
-        function mostrarMensajeFlujo() {
-            mensajeActual = `DISFRUTA TODO EL CONTENIDO EN VIVO CON LA MÁXIMA CALIDAD CON FLUJOTV\nVersión 8.2.9.\n\n*Link de descarga para teléfono móvil Android*\nhttps://bitcc.net/flujo-tv-v829\n\nhttp://aftv.news/2918527\n\nDownloader (puede usar cualquiera de los dos)：\n✅ 2918527\n✅ 1009577`;
-            mostrarMensajeEnPantalla('🔗 LINKS FLUJO TV', mensajeActual, 'flujo');
-            const dayMessage = document.getElementById('dayMessage');
-            const saludoDia = obtenerSaludoDiaSemana();
-            const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `🔗 LINKS FLUJO <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
-
-        function mostrarMensajeCompra(banco) {
-            const nombreBanco = banco === 'VENEZUELA' ? 'Banco de Venezuela' : 'Banco Mercantil';
-            mensajeActual = `*Para procesar su pedido y registrar el servicio, por favor envíenos los siguientes datos:*\n\n👤 *Nombre y Apellido:*\n📞 *Teléfono de contacto:*\n📧 *Correo electrónico:*\n🆔 *Cédula:*\n\n💳 *DATOS PARA EL PAGO MÓVIL:*\n🏦 *Banco:* ${nombreBanco}\n🆔 *Cédula:* 13.967.475\n📱 *Teléfono:* 0412-0754787\n\n📧 *A su correo electrónico llegará el comprobante de su compra* 🧾 *y las futuras renovaciones del servicio* 🔄\n\n✨ *¡Muchas gracias por su confianza!* ✨`;
-            mostrarMensajeEnPantalla(`🛒 SOLICITUD DE COMPRA - ${nombreBanco}`, mensajeActual, 'compra');
-            const dayMessage = document.getElementById('dayMessage');
-            const saludoDia = obtenerSaludoDiaSemana();
-            const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `🛒 COMPRA - ${nombreBanco} <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
-
-        // *** MENSAJE FINAL DE CHAT CON SALUDO DINÁMICO ***
-        function mostrarMensajeFinal() {
-            const saludoHora = obtenerSaludoPorHora();
-            mensajeActual = `Gracias por estar hoy acá con nosotros. 🙌✨ ${saludoHora.saludo} 🙏🌈
-
-RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
-
-🎧 APLICACIONES MUSICALES:
-
-🎶 SPOTIFY (Cuenta): 4$
-🎬 YOUTUBE PREMIUM (Cuenta): 4.5$
-
-🎨 APLICACIONES DE DISEÑO:
-
-🖌️ CANVA PRO (Con tu correo): 1$
-🗓️ CANVA PRO (Un año): 10$
-🎬 CAPCUT PRO (Un mes): 3.5$
-🤖 CHAT GPT: 6$
-
-📺 PANTALLAS Y CUENTAS:
-🔹 DISNEY PLUS (Con 7 ESPN y HULU)
- Pantalla: 4$ BCV 🖥️
- Cuenta completa (7 perfiles): 20$
-
-🔹 AMAZON PRIME VIDEO
- Pantalla: 1.5$ 🎥
-
-🔹 MAX PREMIUM
- Pantalla: 1.6$ 🍿
-
-🔹 PARAMOUNT
- Pantalla: 1.5$ 🎞️
-
-🔹 CRUNCHYROLL
- Pantalla: 1.5$ ⛩️
-
-🎮 RECARGAS DE JUEGOS:
-* FREE FIRE y más... 🔥💎`;
-
-            mostrarMensajeEnPantalla('🎯 MENSAJE FINAL DE CHAT', mensajeActual, 'final');
-            const dayMessage = document.getElementById('dayMessage');
-            const saludoDia = obtenerSaludoDiaSemana();
-            dayMessage.innerHTML = `🎯 MENSAJE FINAL DE CHAT <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
-
         function mostrarMensajeEnPantalla(info, mensaje, tipo = '') {
             const messageContainer = document.getElementById('messageContainer');
             const messageContent = document.getElementById('messageContent');
@@ -883,26 +1165,6 @@ RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
             messageInfo.innerHTML = info;
             messageContainer.style.display = 'block';
             setTimeout(() => messageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-        }
-
-        function copiarMensaje() {
-            if (!mensajeActual) { mostrarNotificacion('⚠️ Por favor, genera un mensaje primero', 'error'); return; }
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(mensajeActual).then(() => mostrarNotificacion('✅ Mensaje copiado al portapapeles', 'success')).catch(err => { console.error(err); fallbackCopiarMensaje(); });
-            } else { fallbackCopiarMensaje(); }
-        }
-
-        function fallbackCopiarMensaje() {
-            const textarea = document.createElement('textarea');
-            textarea.value = mensajeActual;
-            textarea.style.position = 'fixed'; textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select(); textarea.setSelectionRange(0, 99999);
-            try {
-                if (document.execCommand('copy')) mostrarNotificacion('✅ Mensaje copiado al portapapeles', 'success');
-                else mostrarNotificacion('❌ Error al copiar el mensaje', 'error');
-            } catch (err) { mostrarNotificacion('❌ No se pudo copiar el mensaje', 'error'); }
-            document.body.removeChild(textarea);
         }
 
         function mostrarNotificacion(mensaje, tipo) {
