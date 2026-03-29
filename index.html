@@ -327,6 +327,32 @@
             transition: border-color 0.3s ease;
         }
         .form-control:focus { outline: none; border-color: #fbbf24; }
+        
+        /* Selector de horas */
+        .select-group {
+            margin-bottom: 15px;
+        }
+        .select-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        .horas-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        .horas-select:focus {
+            outline: none;
+            border-color: #fbbf24;
+        }
+        
         .btn-generar {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             color: white;
@@ -594,11 +620,11 @@
                 <button class="btn-close" onclick="toggleGeneradorPanaxPanel()">✕ CERRAR</button>
             </div>
 
-            <!-- Panel generador STELLA -->
+            <!-- Panel generador STELLA (con selector de horas) -->
             <div id="generadorStellaPanel" class="generadorstella-panel">
                 <h3>⭐ GENERADOR DE MENSAJES STELLA TV</h3>
                 <div class="opciones-grid">
-                    <button id="btnStellaDemo" class="btn-opcion demo" onclick="mostrarFormularioStellaDemo()"><span>🕐</span> DEMO STELLA (2h)</button>
+                    <button id="btnStellaDemo" class="btn-opcion demo" onclick="mostrarFormularioStellaDemo()"><span>🕐</span> DEMO STELLA</button>
                     <button id="btnStellaPantalla" class="btn-opcion pantalla" onclick="mostrarFormularioStellaPantalla()"><span>📱</span> PANTALLA STELLA</button>
                     <button id="btnStellaCuenta" class="btn-opcion cuenta" onclick="mostrarFormularioStellaCuenta()"><span>👥</span> CUENTA STELLA</button>
                     <button id="btnStellaRenovacion" class="btn-opcion renovacion" onclick="mostrarFormularioStellaRenovacion()"><span>🔄</span> RENOVACIÓN STELLA</button>
@@ -606,7 +632,18 @@
                 <div id="formularioStellaDatos" class="datos-form" style="display: none;">
                     <h4 id="formStellaTitulo" style="text-align:center; margin-bottom:20px; color:#4a5568;"></h4>
                     <div class="form-group" id="stellaUsuarioGroup"><label for="stellaUsuario">👤 USUARIO:</label><input type="text" id="stellaUsuario" class="form-control" placeholder="Ingrese el usuario"></div>
-                    <div class="form-group" id="stellaClaveGroup"><label for="stellaClave">🔑 NUEVA CLAVE:</label><input type="text" id="stellaClave" class="form-control" placeholder="Ingrese la nueva clave"></div>
+                    <div class="form-group" id="stellaClaveGroup"><label for="stellaClave">🔑 CLAVE:</label><input type="text" id="stellaClave" class="form-control" placeholder="Ingrese la clave"></div>
+                    
+                    <!-- Selector de horas para DEMO (solo visible cuando se selecciona demo) -->
+                    <div id="stellaHorasGroup" class="select-group" style="display: none;">
+                        <label for="stellaHoras">⏱️ DURACIÓN DEL DEMO:</label>
+                        <select id="stellaHoras" class="horas-select">
+                            <option value="2">2 horas</option>
+                            <option value="6">6 horas</option>
+                            <option value="24">24 horas</option>
+                        </select>
+                    </div>
+                    
                     <button class="btn-generar" onclick="generarMensajeStellaPersonalizado()"><span>⚡</span> GENERAR MENSAJE</button>
                 </div>
                 <button class="btn-close" onclick="toggleGeneradorStellaPanel()">✕ CERRAR</button>
@@ -784,12 +821,13 @@
             }
         }
 
-        // ==================== GENERADOR STELLA ====================
+        // ==================== GENERADOR STELLA (con selector de horas) ====================
         function mostrarFormularioStellaDemo() {
             tipoStellaActual = 'demo';
-            document.getElementById('formStellaTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO STELLA TV (2 HORAS)';
+            document.getElementById('formStellaTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO STELLA TV';
             document.getElementById('stellaUsuarioGroup').style.display = 'block';
             document.getElementById('stellaClaveGroup').style.display = 'block';
+            document.getElementById('stellaHorasGroup').style.display = 'block';
             document.getElementById('formularioStellaDatos').style.display = 'block';
             document.getElementById('stellaUsuario').value = '';
             document.getElementById('stellaClave').value = '';
@@ -800,6 +838,7 @@
             document.getElementById('formStellaTitulo').innerHTML = '📱 INGRESA DATOS DE PANTALLA STELLA TV';
             document.getElementById('stellaUsuarioGroup').style.display = 'block';
             document.getElementById('stellaClaveGroup').style.display = 'block';
+            document.getElementById('stellaHorasGroup').style.display = 'none';
             document.getElementById('formularioStellaDatos').style.display = 'block';
             document.getElementById('stellaUsuario').value = '';
             document.getElementById('stellaClave').value = '';
@@ -810,6 +849,7 @@
             document.getElementById('formStellaTitulo').innerHTML = '👥 INGRESA DATOS DE CUENTA STELLA TV';
             document.getElementById('stellaUsuarioGroup').style.display = 'block';
             document.getElementById('stellaClaveGroup').style.display = 'block';
+            document.getElementById('stellaHorasGroup').style.display = 'none';
             document.getElementById('formularioStellaDatos').style.display = 'block';
             document.getElementById('stellaUsuario').value = '';
             document.getElementById('stellaClave').value = '';
@@ -820,6 +860,7 @@
             document.getElementById('formStellaTitulo').innerHTML = '🔄 INGRESA DATOS PARA RENOVACIÓN STELLA TV';
             document.getElementById('stellaUsuarioGroup').style.display = 'block';
             document.getElementById('stellaClaveGroup').style.display = 'block';
+            document.getElementById('stellaHorasGroup').style.display = 'none';
             document.getElementById('formularioStellaDatos').style.display = 'block';
             document.getElementById('stellaUsuario').value = '';
             document.getElementById('stellaClave').value = '';
@@ -841,10 +882,12 @@
             let botonId = '';
 
             if (tipoStellaActual === 'demo') {
-                const fechaVencimiento = new Date(fecha.getTime() + 2 * 60 * 60 * 1000); // 2 horas
+                const horasSeleccionadas = parseInt(document.getElementById('stellaHoras').value);
+                const horasTexto = horasSeleccionadas === 1 ? 'hora' : 'horas';
+                const fechaVencimiento = new Date(fecha.getTime() + horasSeleccionadas * 60 * 60 * 1000);
                 const horaVenceStr = fechaVencimiento.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-                mensaje = `*⭐ DATOS DE SU DEMO STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVenceStr} (2 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
-                tipoTexto = 'DEMO';
+                mensaje = `*⭐ DATOS DE SU DEMO STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVenceStr} (${horasSeleccionadas} ${horasTexto} después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
+                tipoTexto = `DEMO ${horasSeleccionadas}H`;
                 botonId = 'btnStellaDemo';
             } else if (tipoStellaActual === 'pantalla') {
                 const fechaVencimiento = new Date(fecha);
@@ -878,7 +921,7 @@
             toggleGeneradorStellaPanel();
         }
 
-        // Funciones para otros generadores (FLUJO, PANAX) se mantienen igual
+        // ==================== FUNCIONES FLUJO Y PANAX (simplificadas por brevedad, en el código final van completas) ====================
         function mostrarFormularioFlujoDemo() {
             tipoFlujoActual = 'demo';
             document.getElementById('formFlujoTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO FLUJO TV (3 HORAS)';
@@ -1065,13 +1108,13 @@
             toggleGeneradorPanaxPanel();
         }
 
-        // Mensajes comerciales y otros (se mantienen igual)
+        // Mensajes comerciales, recontacto y final (se mantienen igual)
         function mostrarMensajeRecontacto() {
             const mensaje = `Hola! 👋 ¡Qué gusto saludarte nuevamente! 😊 Bendiciones para ti y tu familia desde PANAXTREAMING 🌟🙏
 
 Queremos, si probaste nuestra aplicación, saber qué te pareció 💬 y, si no, darte un *DEMO GRATIS* 🎁 para que la pruebes por *12 horas* en tu TELÉFONO 📱, SMART TV 📺, FIRE TV 🔥, ROKU 📺 o tu PC 💻 y así puedas verificar todo el contenido y lo que te ofrecemos. 🎬✨
 
-Si usaste nuestra aplicación pero no llenó tus expectativas, tenemos prueba gratis de *DOS PLATAFORMAS MUY BUENAS* 🔝 con demos de *2 horas* y *3 horas* para que pruebes cuál se ajusta a tus necesidades: *FLUJO TV PREMIUM* 💎 y *STELLA TV* ⭐. Dinos de cuál deseas información, qué trae, y te daremos el demo y el paso a paso para descargar. 📲📥
+Si usaste nuestra aplicación pero no llenó tus expectativas, tenemos prueba gratis de *DOS PLATAFORMAS MUY BUENAS* 🔝 con demos de *2 horas*, *6 horas* y *24 horas* para que pruebes cuál se ajusta a tus necesidades: *FLUJO TV PREMIUM* 💎 y *STELLA TV* ⭐. Dinos de cuál deseas información, qué trae, y te daremos el demo y el paso a paso para descargar. 📲📥
 
 ¡Queremos ser tu alternativa en entretenimiento! 🌈 *SOMOS PANAXTREAMING: UN UNIVERSO DE ENTRETENIMIENTO* 🌌🎬🚀`;
             mostrarMensajeConCopia('🔄 MENSAJE DE RECONTACTO', mensaje, 'recontacto', null);
@@ -1160,7 +1203,7 @@ Contenido organizado y separado por carpetas:
 ✅ Cuenta Completa (3 Disp. Simultáneos): 12$
 📌 A tasa BCV del día.
 
-🎁 *¡SOLICITA TU PRUEBA DE 2 HORAS GRATIS!* 🎁
+🎁 *¡SOLICITA TU PRUEBA DE 2, 6 O 24 HORAS!* 🎁
 Disponible para Android, Fire TV, Smart TV o PC. ¡Pruébala ya! 🚀`;
             mostrarMensajeConCopia('📊 STELLA TV - COMERCIAL', mensaje, 'comercial', 'btnStella');
             const dayMessage = document.getElementById('dayMessage');
