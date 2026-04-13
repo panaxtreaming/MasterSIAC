@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIAC - Sistema Integral de Atención al Cliente</title>
     <style>
+        /* ========== ESTILOS COMPLETOS (sin cambios) ========== */
         * {
             margin: 0;
             padding: 0;
@@ -511,6 +512,7 @@
         .message-info.compra { background: #e9d8fd; color: #553c9a; }
         .message-info.final { background: #e0e7ff; color: #3730a3; }
         .message-info.recontacto { background: #ffedd5; color: #9a3412; }
+        .message-info.saludo { background: #d1fae5; color: #065f46; }
 
         @media (max-width: 600px) {
             .header h1 { font-size: 2em; }
@@ -633,8 +635,6 @@
                     <h4 id="formStellaTitulo" style="text-align:center; margin-bottom:20px; color:#4a5568;"></h4>
                     <div class="form-group" id="stellaUsuarioGroup"><label for="stellaUsuario">👤 USUARIO:</label><input type="text" id="stellaUsuario" class="form-control" placeholder="Ingrese el usuario"></div>
                     <div class="form-group" id="stellaClaveGroup"><label for="stellaClave">🔑 CLAVE:</label><input type="text" id="stellaClave" class="form-control" placeholder="Ingrese la clave"></div>
-                    
-                    <!-- Selector de horas para DEMO (solo visible cuando se selecciona demo) -->
                     <div id="stellaHorasGroup" class="select-group" style="display: none;">
                         <label for="stellaHoras">⏱️ DURACIÓN DEL DEMO:</label>
                         <select id="stellaHoras" class="horas-select">
@@ -643,7 +643,6 @@
                             <option value="24">24 horas</option>
                         </select>
                     </div>
-                    
                     <button class="btn-generar" onclick="generarMensajeStellaPersonalizado()"><span>⚡</span> GENERAR MENSAJE</button>
                 </div>
                 <button class="btn-close" onclick="toggleGeneradorStellaPanel()">✕ CERRAR</button>
@@ -672,18 +671,14 @@
         let tipoStellaActual = '';
         let botonActual = null;
 
-        // Función para marcar un botón como copiado
+        // Funciones de utilidad general (copiado, paneles, etc.)
         function marcarBotonCopiado(botonId) {
-            document.querySelectorAll('.btn-copied').forEach(btn => {
-                btn.classList.remove('btn-copied');
-            });
+            document.querySelectorAll('.btn-copied').forEach(btn => btn.classList.remove('btn-copied'));
             if (botonId) {
                 const btn = document.getElementById(botonId);
                 if (btn) {
                     btn.classList.add('btn-copied');
-                    setTimeout(() => {
-                        if (btn) btn.classList.remove('btn-copied');
-                    }, 2500);
+                    setTimeout(() => btn.classList.remove('btn-copied'), 2500);
                 }
             }
         }
@@ -697,7 +692,7 @@
                 navigator.clipboard.writeText(mensajeActual).then(() => {
                     mostrarNotificacion('✅ Mensaje copiado al portapapeles', 'success');
                     if (botonActual) marcarBotonCopiado(botonActual);
-                }).catch(err => fallbackCopiarMensaje());
+                }).catch(() => fallbackCopiarMensaje());
             } else {
                 fallbackCopiarMensaje();
             }
@@ -738,7 +733,7 @@
             }
         }
 
-        // Funciones para paneles
+        // Funciones de paneles (toggle)
         function toggleAgentsPanel() {
             const panel = document.getElementById('agentsPanel');
             panel.classList.toggle('visible');
@@ -747,9 +742,7 @@
             document.getElementById('generadorPanaxPanel').classList.remove('visible');
             document.getElementById('generadorStellaPanel').classList.remove('visible');
             document.getElementById('comercialSection').classList.remove('visible');
-            if (panel.classList.contains('visible')) {
-                setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-            }
+            if (panel.classList.contains('visible')) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
 
         function toggleCompraPanel() {
@@ -760,9 +753,7 @@
             document.getElementById('generadorPanaxPanel').classList.remove('visible');
             document.getElementById('generadorStellaPanel').classList.remove('visible');
             document.getElementById('comercialSection').classList.remove('visible');
-            if (panel.classList.contains('visible')) {
-                setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-            }
+            if (panel.classList.contains('visible')) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
 
         function toggleGeneradorFlujoPanel() {
@@ -773,12 +764,8 @@
             document.getElementById('generadorPanaxPanel').classList.remove('visible');
             document.getElementById('generadorStellaPanel').classList.remove('visible');
             document.getElementById('comercialSection').classList.remove('visible');
-            if (!panel.classList.contains('visible')) {
-                document.getElementById('formularioFlujoDatos').style.display = 'none';
-            }
-            if (panel.classList.contains('visible')) {
-                setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-            }
+            if (!panel.classList.contains('visible')) document.getElementById('formularioFlujoDatos').style.display = 'none';
+            if (panel.classList.contains('visible')) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
 
         function toggleGeneradorPanaxPanel() {
@@ -789,12 +776,8 @@
             document.getElementById('generadorFlujoPanel').classList.remove('visible');
             document.getElementById('generadorStellaPanel').classList.remove('visible');
             document.getElementById('comercialSection').classList.remove('visible');
-            if (!panel.classList.contains('visible')) {
-                document.getElementById('formularioPanaxDatos').style.display = 'none';
-            }
-            if (panel.classList.contains('visible')) {
-                setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-            }
+            if (!panel.classList.contains('visible')) document.getElementById('formularioPanaxDatos').style.display = 'none';
+            if (panel.classList.contains('visible')) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
 
         function toggleGeneradorStellaPanel() {
@@ -805,23 +788,17 @@
             document.getElementById('generadorFlujoPanel').classList.remove('visible');
             document.getElementById('generadorPanaxPanel').classList.remove('visible');
             document.getElementById('comercialSection').classList.remove('visible');
-            if (!panel.classList.contains('visible')) {
-                document.getElementById('formularioStellaDatos').style.display = 'none';
-            }
-            if (panel.classList.contains('visible')) {
-                setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-            }
+            if (!panel.classList.contains('visible')) document.getElementById('formularioStellaDatos').style.display = 'none';
+            if (panel.classList.contains('visible')) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
 
         function toggleComercialSection() {
             const section = document.getElementById('comercialSection');
             section.classList.toggle('visible');
-            if (section.classList.contains('visible')) {
-                setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-            }
+            if (section.classList.contains('visible')) setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
 
-        // ==================== GENERADOR STELLA (con selector de horas) ====================
+        // ==================== GENERADOR STELLA ====================
         function mostrarFormularioStellaDemo() {
             tipoStellaActual = 'demo';
             document.getElementById('formStellaTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO STELLA TV';
@@ -877,37 +854,31 @@
             const opcionesFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
             const fechaStr = fecha.toLocaleDateString('es-VE', opcionesFecha);
             const horaStr = fecha.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-            let mensaje = '';
-            let tipoTexto = '';
-            let botonId = '';
+            let mensaje = '', tipoTexto = '', botonId = '';
 
             if (tipoStellaActual === 'demo') {
-                const horasSeleccionadas = parseInt(document.getElementById('stellaHoras').value);
-                const horasTexto = horasSeleccionadas === 1 ? 'hora' : 'horas';
-                const fechaVencimiento = new Date(fecha.getTime() + horasSeleccionadas * 60 * 60 * 1000);
-                const horaVenceStr = fechaVencimiento.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-                mensaje = `*⭐ DATOS DE SU DEMO STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVenceStr} (${horasSeleccionadas} ${horasTexto} después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
-                tipoTexto = `DEMO ${horasSeleccionadas}H`;
+                const horas = parseInt(document.getElementById('stellaHoras').value);
+                const fechaVenc = new Date(fecha.getTime() + horas * 60 * 60 * 1000);
+                const horaVence = fechaVenc.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+                mensaje = `*⭐ DATOS DE SU DEMO STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVence} (${horas} horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
+                tipoTexto = `DEMO ${horas}H`;
                 botonId = 'btnStellaDemo';
             } else if (tipoStellaActual === 'pantalla') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*⭐ DATOS DE SU PANTALLA STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 Prohibido usar la cuenta en más de 1 dispositivo\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*⭐ DATOS DE SU PANTALLA STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVence} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 Prohibido usar la cuenta en más de 1 dispositivo\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
                 tipoTexto = 'PANTALLA';
                 botonId = 'btnStellaPantalla';
             } else if (tipoStellaActual === 'cuenta') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*⭐ DATOS DE SU CUENTA STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 La cuenta puede usarse en 3 dispositivos simultáneos\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*⭐ DATOS DE SU CUENTA STELLA TV* ⭐\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVence} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 La cuenta puede usarse en 3 dispositivos simultáneos\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
                 tipoTexto = 'CUENTA';
                 botonId = 'btnStellaCuenta';
             } else if (tipoStellaActual === 'renovacion') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVence} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con STELLA TV! ✨`;
                 tipoTexto = 'RENOVACIÓN';
                 botonId = 'btnStellaRenovacion';
             }
@@ -921,7 +892,7 @@
             toggleGeneradorStellaPanel();
         }
 
-        // ==================== FUNCIONES FLUJO Y PANAX (simplificadas por brevedad, en el código final van completas) ====================
+        // ==================== GENERADOR FLUJO ====================
         function mostrarFormularioFlujoDemo() {
             tipoFlujoActual = 'demo';
             document.getElementById('formFlujoTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO FLUJO TV (3 HORAS)';
@@ -931,7 +902,6 @@
             document.getElementById('flujoUsuario').value = '';
             document.getElementById('flujoClave').value = '';
         }
-
         function mostrarFormularioFlujoPantalla() {
             tipoFlujoActual = 'pantalla';
             document.getElementById('formFlujoTitulo').innerHTML = '📱 INGRESA DATOS DE PANTALLA FLUJO TV';
@@ -941,7 +911,6 @@
             document.getElementById('flujoUsuario').value = '';
             document.getElementById('flujoClave').value = '';
         }
-
         function mostrarFormularioFlujoCuenta() {
             tipoFlujoActual = 'cuenta';
             document.getElementById('formFlujoTitulo').innerHTML = '👥 INGRESA DATOS DE CUENTA FLUJO TV';
@@ -951,7 +920,6 @@
             document.getElementById('flujoUsuario').value = '';
             document.getElementById('flujoClave').value = '';
         }
-
         function mostrarFormularioFlujoRenovacion() {
             tipoFlujoActual = 'renovacion';
             document.getElementById('formFlujoTitulo').innerHTML = '🔄 INGRESA DATOS PARA RENOVACIÓN FLUJO TV';
@@ -961,47 +929,38 @@
             document.getElementById('flujoUsuario').value = '';
             document.getElementById('flujoClave').value = '';
         }
-
         function generarMensajeFlujoPersonalizado() {
             const usuario = document.getElementById('flujoUsuario').value.trim();
             const clave = document.getElementById('flujoClave').value.trim();
-            if (!usuario || !clave) {
-                mostrarNotificacion('⚠️ Por favor ingresa usuario y clave', 'error');
-                return;
-            }
+            if (!usuario || !clave) { mostrarNotificacion('⚠️ Por favor ingresa usuario y clave', 'error'); return; }
             const fecha = new Date();
             const opcionesFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
             const fechaStr = fecha.toLocaleDateString('es-VE', opcionesFecha);
             const horaStr = fecha.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-            let mensaje = '';
-            let tipoTexto = '';
-            let botonId = '';
+            let mensaje = '', tipoTexto = '', botonId = '';
 
             if (tipoFlujoActual === 'demo') {
-                const fechaVencimiento = new Date(fecha.getTime() + 3 * 60 * 60 * 1000);
-                const horaVenceStr = fechaVencimiento.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-                mensaje = `*📺 DATOS DE SU DEMO FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVenceStr} (3 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
+                const fechaVenc = new Date(fecha.getTime() + 3 * 60 * 60 * 1000);
+                const horaVence = fechaVenc.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+                mensaje = `*📺 DATOS DE SU DEMO FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVence} (3 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'DEMO';
                 botonId = 'btnFlujoDemo';
             } else if (tipoFlujoActual === 'pantalla') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*📺 DATOS DE SU PANTALLA FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 Prohibido usar la cuenta en más de 1 dispositivo\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*📺 DATOS DE SU PANTALLA FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVence} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 Prohibido usar la cuenta en más de 1 dispositivo\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'PANTALLA';
                 botonId = 'btnFlujoPantalla';
             } else if (tipoFlujoActual === 'cuenta') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*📺 DATOS DE SU CUENTA FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 La cuenta puede usarse en 3 dispositivos simultáneos\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*📺 DATOS DE SU CUENTA FLUJO TV* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVence} (30 días después)\n\n⚠️ *IMPORTANTE*:\n🔴 Prohibido cambiar correo y contraseña\n🔴 Prohibido editar datos de la cuenta\n🔴 La cuenta puede usarse en 3 dispositivos simultáneos\n🔴 Prohibido compartir la cuenta\n🔴 Prohibido Cambiar Nombre del Perfil\n🔴 Prohibido Cambiar pin de perfil\n\n❌ INCUMPLIR LLEVA A EL BLOQUEO DEL PERFIL SIN REEMBOLSO\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'CUENTA';
                 botonId = 'btnFlujoCuenta';
             } else if (tipoFlujoActual === 'renovacion') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVence} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con FLUJO TV! ✨`;
                 tipoTexto = 'RENOVACIÓN';
                 botonId = 'btnFlujoRenovacion';
             }
@@ -1015,6 +974,7 @@
             toggleGeneradorFlujoPanel();
         }
 
+        // ==================== GENERADOR PANAX ====================
         function mostrarFormularioPanaxDemo() {
             tipoPanaxActual = 'demo';
             document.getElementById('formPanaxTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO PANAXTREAMING (12 HORAS)';
@@ -1024,7 +984,6 @@
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
-
         function mostrarFormularioPanaxPantalla() {
             tipoPanaxActual = 'pantalla';
             document.getElementById('formPanaxTitulo').innerHTML = '📱 INGRESA DATOS DE PANTALLA PANAXTREAMING';
@@ -1034,7 +993,6 @@
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
-
         function mostrarFormularioPanaxCuenta() {
             tipoPanaxActual = 'cuenta';
             document.getElementById('formPanaxTitulo').innerHTML = '👥 INGRESA DATOS DE CUENTA PANAXTREAMING';
@@ -1044,7 +1002,6 @@
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
-
         function mostrarFormularioPanaxRenovacion() {
             tipoPanaxActual = 'renovacion';
             document.getElementById('formPanaxTitulo').innerHTML = '🔄 INGRESA DATOS PARA RENOVACIÓN PANAXTREAMING';
@@ -1054,47 +1011,38 @@
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
-
         function generarMensajePanaxPersonalizado() {
             const usuario = document.getElementById('panaxUsuario').value.trim();
             const clave = document.getElementById('panaxClave').value.trim();
-            if (!usuario || !clave) {
-                mostrarNotificacion('⚠️ Por favor ingresa usuario y clave', 'error');
-                return;
-            }
+            if (!usuario || !clave) { mostrarNotificacion('⚠️ Por favor ingresa usuario y clave', 'error'); return; }
             const fecha = new Date();
             const opcionesFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
             const fechaStr = fecha.toLocaleDateString('es-VE', opcionesFecha);
             const horaStr = fecha.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-            let mensaje = '';
-            let tipoTexto = '';
-            let botonId = '';
+            let mensaje = '', tipoTexto = '', botonId = '';
 
             if (tipoPanaxActual === 'demo') {
-                const fechaVencimiento = new Date(fecha.getTime() + 12 * 60 * 60 * 1000);
-                const horaVenceStr = fechaVencimiento.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-                mensaje = `*📺 DATOS DE SU DEMO PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVenceStr} (12 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
+                const fechaVenc = new Date(fecha.getTime() + 12 * 60 * 60 * 1000);
+                const horaVence = fechaVenc.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+                mensaje = `*📺 DATOS DE SU DEMO PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVence} (12 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'DEMO';
                 botonId = 'btnPanaxDemo';
             } else if (tipoPanaxActual === 'pantalla') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*📺 DATOS DE SU PANTALLA PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*📺 DATOS DE SU PANTALLA PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVence} (30 días después)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'PANTALLA';
                 botonId = 'btnPanaxPantalla';
             } else if (tipoPanaxActual === 'cuenta') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*📺 DATOS DE SU CUENTA PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*📺 DATOS DE SU CUENTA PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n📅 Vence: ${fechaVence} (30 días después)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'CUENTA';
                 botonId = 'btnPanaxCuenta';
             } else if (tipoPanaxActual === 'renovacion') {
-                const fechaVencimiento = new Date(fecha);
-                fechaVencimiento.setDate(fecha.getDate() + 30);
-                const fechaVenceStr = fechaVencimiento.toLocaleDateString('es-VE', opcionesFecha);
-                mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVenceStr} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
+                const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
+                const fechaVence = fechaVenc.toLocaleDateString('es-VE', opcionesFecha);
+                mensaje = `*🔄 CUENTA RENOVADA CON ÉXITO* 🔄\n\n👤 Usuario: ${usuario}\n🔑 Nueva clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de renovación: ${fechaStr}\n⏰ Hora de renovación: ${horaStr}\n📅 Vence: ${fechaVence} (30 días después)\n\n🙏 GRACIAS POR PREFERIRNOS 🙏\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
                 tipoTexto = 'RENOVACIÓN';
                 botonId = 'btnPanaxRenovacion';
             }
@@ -1108,24 +1056,91 @@
             toggleGeneradorPanaxPanel();
         }
 
-        // Mensajes comerciales, recontacto y final (se mantienen igual)
-        function mostrarMensajeRecontacto() {
-            const mensaje = `Hola! 👋 ¡Qué gusto saludarte nuevamente! 😊 Bendiciones para ti y tu familia desde PANAXTREAMING 🌟🙏
+        // ==================== FUNCIÓN SALUDO ACTUALIZADA ====================
+        function generarMensajeSaludo(ejecutivo) {
+            const hora = new Date().getHours();
+            let saludoHora = '';
+            if (hora >= 5 && hora < 12) {
+                saludoHora = '¡Buenos días!';
+            } else if (hora >= 12 && hora < 19) {
+                saludoHora = '¡Buenas tardes!';
+            } else {
+                saludoHora = '¡Buenas noches!';
+            }
 
-Queremos, si probaste nuestra aplicación, saber qué te pareció 💬 y, si no, darte un *DEMO GRATIS* 🎁 para que la pruebes por *12 horas* en tu TELÉFONO 📱, SMART TV 📺, FIRE TV 🔥, ROKU 📺 o tu PC 💻 y así puedas verificar todo el contenido y lo que te ofrecemos. 🎬✨
+            const fecha = new Date();
+            const diaSemana = fecha.getDay();
+            let saludoDia = '';
+            if (diaSemana === 1) {
+                saludoDia = '¡Feliz inicio de semana!';
+            } else if (diaSemana === 5 || diaSemana === 6 || diaSemana === 0) {
+                saludoDia = '¡Feliz fin de semana!';
+            }
 
-Si usaste nuestra aplicación pero no llenó tus expectativas, tenemos prueba gratis de *DOS PLATAFORMAS MUY BUENAS* 🔝 con demos de *2 horas*, *6 horas* y *24 horas* para que pruebes cuál se ajusta a tus necesidades: *FLUJO TV PREMIUM* 💎 y *STELLA TV* ⭐. Dinos de cuál deseas información, qué trae, y te daremos el demo y el paso a paso para descargar. 📲📥
+            const saludoCompleto = `${saludoHora} ${saludoDia}`.trim();
 
-¡Queremos ser tu alternativa en entretenimiento! 🌈 *SOMOS PANAXTREAMING: UN UNIVERSO DE ENTRETENIMIENTO* 🌌🎬🚀`;
-            mostrarMensajeConCopia('🔄 MENSAJE DE RECONTACTO', mensaje, 'recontacto', null);
+            const mensaje = `${saludoCompleto}
+
+*${ejecutivo}* le escribe, tendré el gusto de atenderle en este día. 👋
+
+Mil disculpas por la demora; tenemos muchos chats de atención tan importantes como el tuyo y ya estamos contigo. 😊
+
+Te ofrecemos 3 PLATAFORMAS PREMIUM 🌟 para disfrutar de:
+
+⚽️ TV EN VIVO: Canales deportivos como ESPN, Fox Sports, DSports y más.
+🎬 CINE Y SERIES: Contenido de Netflix, Amazon Prime, Disney+, Max, entre otras.
+
+Nuestras opciones y precios (Tasa BCV):
+
+1️⃣ PANAXTREAMING 🚀 (Única con aplicación disponible en ROKU)
+
+📊 Características: +1500 canales internacionales, +100 nacionales, +8900 películas y +3000 series.
+
+📱 Pantalla: 3$
+
+🏠 Cuenta Completa (4 dispositivos simultáneos): 7.5$
+
+2️⃣ FLUJO TV 📺
+
+📊 Características: +1800 canales y 20 mil películas y series.
+
+📱 Pantalla: 3.5$
+
+🏠 Cuenta Completa (3 dispositivos simultáneos): 8.5$
+
+3️⃣ STELLA TV ✨
+
+📊 Características: +2000 canales, eventos deportivos organizados, descargas para ver sin internet y reproducción en segundo plano.
+
+📱 Pantalla: 4$
+
+🏠 Cuenta Completa (3 dispositivos): 11$
+
+Dinos en qué equipo disfrutarás tu PRUEBA GRATIS: 📱 Teléfono, 🎥 Fire TV / Stick, 💻 PC o Laptop, o en tu 📺 Smart TV con sistema Android.
+
+⚠️ Nota: Solo Panaxtreaming es compatible con Roku; las otras dos plataformas no.
+
+¿Cuál de las tres deseas probar primero? 👇`;
+
+            let botonId = '';
+            if (ejecutivo === 'ANGEL DUGARTE') botonId = 'btnAngel';
+            else if (ejecutivo === 'RICARDO DUGARTE') botonId = 'btnRicardo';
+            else if (ejecutivo === 'THANY BRICEÑO') botonId = 'btnThany';
+            else if (ejecutivo === 'CARLOS ZAMBRANO') botonId = 'btnCarlos';
+            else if (ejecutivo === 'MARIA RIVAS') botonId = 'btnMaria';
+            else if (ejecutivo === 'JOSE ALTUVE') botonId = 'btnJose';
+            
+            mostrarMensajeConCopia(`💬 Mensaje de saludo - Ejecutivo: ${ejecutivo}`, mensaje, 'saludo', botonId);
+            
             const dayMessage = document.getElementById('dayMessage');
-            const saludoDia = obtenerSaludoDiaSemana();
-            const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `🔄 RECONTACTO <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+            const saludoDiaObj = obtenerSaludoDiaSemana();
+            const saludoHoraObj = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `💬 Mensaje de saludo para: <strong>${ejecutivo}</strong> <span class="time-indicator ${saludoHoraObj.periodo}">${saludoHoraObj.texto}</span> <span class="day-indicator ${saludoDiaObj.clase}">${saludoDiaObj.dia} ${saludoDiaObj.saludo ? '• ' + saludoDiaObj.saludo : ''}</span>`;
         }
 
+        // ==================== MENSAJES COMERCIALES ====================
         function mostrarMensajeComercialCompleto() {
-            const mensajeCompleto = `*PANAXTREAMING TE OFRECE:* 🚀 *TV EN VIVO* 📺 +1500 CANALES EN VIVO INCLUYE ESPN, FOX SPORT, DIRECTV SPORT, HBO, NOTICIAS Y MAS 🏆, TAMBIÉN TE OFRECE MÁS DE 13000 PELÍCULAS Y SERIES DE ESTRENO Y CLÁSICAS 🎬 🍿
+            const mensaje = `*PANAXTREAMING TE OFRECE:* 🚀 *TV EN VIVO* 📺 +1500 CANALES EN VIVO INCLUYE ESPN, FOX SPORT, DIRECTV SPORT, HBO, NOTICIAS Y MAS 🏆, TAMBIÉN TE OFRECE MÁS DE 13000 PELÍCULAS Y SERIES DE ESTRENO Y CLÁSICAS 🎬 🍿
 
 Lo puedes disfrutar en tu teléfono 📱, Smart TV 📺 o Fire TV, Google TV, Roku o PC 💻
 
@@ -1138,7 +1153,7 @@ ________________________________________________________________________________
 
 Lo puedes disfrutar en tu teléfono 📱, Smart TV 📺 o Fire TV, Google TV o PC 💻
 
-*PANTALLA 30 DÍAS 4$ BCV* 📉 *CUENTA COMPLETA 4 DISPOSITIVOS SIMULTÁNEO 8.5$ TASA BCV* 💳
+*PANTALLA 30 DÍAS 3.5$ BCV* 📉 *CUENTA COMPLETA 4 DISPOSITIVOS SIMULTÁNEO 8.5$ TASA BCV* 💳
 
 *PIDE TU MUESTRA GRATIS 3 HORAS* 🎁 ✨
 ________________________________________________________________________________
@@ -1151,11 +1166,11 @@ Lo puedes disfrutar en tu teléfono 📱, Smart TV 📺 o Fire TV, Google TV o P
 
 El catalogo de Peliculas y series esta organizado segun la plataforma donde esta es decir NETFLIX EN UNA CARPETA 📁 DISNEY UNA CARPETA 📁
 
-*PANTALLA 30 DÍAS 4.5$ BCV* 📉 *CUENTA COMPLETA 3 DISPOSITIVOS SIMULTÁNEO 10$ TASA BCV* 💳
+*PANTALLA 30 DÍAS 4$ BCV* 📉 *CUENTA COMPLETA 3 DISPOSITIVOS SIMULTÁNEO 11$ TASA BCV* 💳
 
 *PIDE TU MUESTRA GRATIS 2 HORAS* 🎁 ✨ 🚀`;
-            mostrarMensajeConCopia('📊 COMPARATIVA DE PLATAFORMAS', mensajeCompleto, 'comercial', null);
-            setTimeout(() => { toggleComercialSection(); }, 500);
+            mostrarMensajeConCopia('📊 COMPARATIVA DE PLATAFORMAS', mensaje, 'comercial', null);
+            setTimeout(() => toggleComercialSection(), 500);
             const dayMessage = document.getElementById('dayMessage');
             const saludoDia = obtenerSaludoDiaSemana();
             const saludoHora = obtenerSaludoPorHora();
@@ -1199,8 +1214,8 @@ Contenido organizado y separado por carpetas:
 ✅ Netflix | ✅ Disney Plus | ✅ Amazon Prime | ✅ Apple TV
 
 📊 *TARIFAS (30 DÍAS):*
-✅ Por Pantalla: 5$
-✅ Cuenta Completa (3 Disp. Simultáneos): 12$
+✅ Por Pantalla: 4$
+✅ Cuenta Completa (3 Disp. Simultáneos): 11$
 📌 A tasa BCV del día.
 
 🎁 *¡SOLICITA TU PRUEBA DE 2, 6 O 24 HORAS!* 🎁
@@ -1224,7 +1239,7 @@ Disponible para Android, Fire TV, Smart TV o PC. ¡Pruébala ya! 🚀`;
 Contenido de Netflix, Amazon, Disney+ y todos los canales Premium como HBO y Cinecanal.
 
 📊 *TARIFAS (30 DÍAS):*
-✅ Por Pantalla: 4$
+✅ Por Pantalla: 3.5$
 ✅ Cuenta Completa (3 Disp. Simultáneos): 8.5$
 📌 A tasa BCV del día.
 
@@ -1237,32 +1252,20 @@ Disponible para Android, Fire TV, Smart TV o PC. ¡Pruébala ya! 🚀`;
             dayMessage.innerHTML = `📊 FLUJO TV PREMIUM <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
-        function generarMensajeSaludo(ejecutivo) {
-            const saludoHora = obtenerSaludoPorHora();
-            const saludoDia = obtenerSaludoDiaSemana();
-            const mensajeSaludoDia = saludoDia.saludo ? ` ${saludoDia.saludo}` : '';
-            const mensaje = `${saludoHora.saludo}${mensajeSaludoDia} ${saludoHora.emoji} Desde *PANAXTREAMING*, tu plataforma de entretenimiento, le escribe *${ejecutivo}*, Ejecutivo de Atención al Usuario de *PANAXTREAMING TV GO*. 🤝\n\nOfrecemos disculpas por la demora en responder su mensaje; debido al alto número de chats, el suyo es superimportante para nosotros. 📈✨\n\n_Tendré el gusto de atenderle en este día._ 👨‍💻🎬`;
-            let botonId = '';
-            if (ejecutivo === 'ANGEL DUGARTE') botonId = 'btnAngel';
-            else if (ejecutivo === 'RICARDO DUGARTE') botonId = 'btnRicardo';
-            else if (ejecutivo === 'THANY BRICEÑO') botonId = 'btnThany';
-            else if (ejecutivo === 'CARLOS ZAMBRANO') botonId = 'btnCarlos';
-            else if (ejecutivo === 'MARIA RIVAS') botonId = 'btnMaria';
-            else if (ejecutivo === 'JOSE ALTUVE') botonId = 'btnJose';
-            mostrarMensajeConCopia(`💬 Mensaje de saludo - Ejecutivo: ${ejecutivo} (${saludoHora.texto})`, mensaje, 'saludo', botonId);
-            const dayMessage = document.getElementById('dayMessage');
-            dayMessage.innerHTML = `💬 Mensaje de saludo para: <strong>${ejecutivo}</strong> <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
+        // ==================== OTROS MENSAJES ====================
+        function mostrarMensajeRecontacto() {
+            const mensaje = `Hola! 👋 ¡Qué gusto saludarte nuevamente! 😊 Bendiciones para ti y tu familia desde PANAXTREAMING 🌟🙏
 
-        function mostrarMensajeCompra(banco) {
-            const nombreBanco = banco === 'VENEZUELA' ? 'Banco de Venezuela' : 'Banco Mercantil';
-            const mensaje = `*Para procesar su pedido y registrar el servicio, por favor envíenos los siguientes datos:*\n\n👤 *Nombre y Apellido:*\n📞 *Teléfono de contacto:*\n📧 *Correo electrónico:*\n🆔 *Cédula:*\n\n💳 *DATOS PARA EL PAGO MÓVIL:*\n🏦 *Banco:* ${nombreBanco}\n🆔 *Cédula:* 13.967.475\n📱 *Teléfono:* 0412-0754787\n\n📧 *A su correo electrónico llegará el comprobante de su compra* 🧾 *y las futuras renovaciones del servicio* 🔄\n\n✨ *¡Muchas gracias por su confianza!* ✨`;
-            const botonId = banco === 'VENEZUELA' ? 'btnVenezuela' : 'btnMercantil';
-            mostrarMensajeConCopia(`🛒 SOLICITUD DE COMPRA - ${nombreBanco}`, mensaje, 'compra', botonId);
+Queremos, si probaste nuestra aplicación, saber qué te pareció 💬 y, si no, darte un *DEMO GRATIS* 🎁 para que la pruebes por *12 horas* en tu TELÉFONO 📱, SMART TV 📺, FIRE TV 🔥, ROKU 📺 o tu PC 💻 y así puedas verificar todo el contenido y lo que te ofrecemos. 🎬✨
+
+Si usaste nuestra aplicación pero no llenó tus expectativas, tenemos prueba gratis de *DOS PLATAFORMAS MUY BUENAS* 🔝 con demos de *2 horas*, *6 horas* y *24 horas* para que pruebes cuál se ajusta a tus necesidades: *FLUJO TV PREMIUM* 💎 y *STELLA TV* ⭐. Dinos de cuál deseas información, qué trae, y te daremos el demo y el paso a paso para descargar. 📲📥
+
+¡Queremos ser tu alternativa en entretenimiento! 🌈 *SOMOS PANAXTREAMING: UN UNIVERSO DE ENTRETENIMIENTO* 🌌🎬🚀`;
+            mostrarMensajeConCopia('🔄 MENSAJE DE RECONTACTO', mensaje, 'recontacto', null);
             const dayMessage = document.getElementById('dayMessage');
             const saludoDia = obtenerSaludoDiaSemana();
             const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `🛒 COMPRA - ${nombreBanco} <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+            dayMessage.innerHTML = `🔄 RECONTACTO <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
         function mostrarMensajeDescargaPanax() {
@@ -1281,6 +1284,17 @@ Disponible para Android, Fire TV, Smart TV o PC. ¡Pruébala ya! 🚀`;
             const saludoDia = obtenerSaludoDiaSemana();
             const saludoHora = obtenerSaludoPorHora();
             dayMessage.innerHTML = `🔗 LINKS FLUJO <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        function mostrarMensajeCompra(banco) {
+            const nombreBanco = banco === 'VENEZUELA' ? 'Banco de Venezuela' : 'Banco Mercantil';
+            const mensaje = `*Para procesar su pedido y registrar el servicio, por favor envíenos los siguientes datos:*\n\n👤 *Nombre y Apellido:*\n📞 *Teléfono de contacto:*\n📧 *Correo electrónico:*\n🆔 *Cédula:*\n\n💳 *DATOS PARA EL PAGO MÓVIL:*\n🏦 *Banco:* ${nombreBanco}\n🆔 *Cédula:* 13.967.475\n📱 *Teléfono:* 0412-0754787\n\n📧 *A su correo electrónico llegará el comprobante de su compra* 🧾 *y las futuras renovaciones del servicio* 🔄\n\n✨ *¡Muchas gracias por su confianza!* ✨`;
+            const botonId = banco === 'VENEZUELA' ? 'btnVenezuela' : 'btnMercantil';
+            mostrarMensajeConCopia(`🛒 SOLICITUD DE COMPRA - ${nombreBanco}`, mensaje, 'compra', botonId);
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `🛒 COMPRA - ${nombreBanco} <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
         function mostrarMensajeFinal() {
@@ -1322,6 +1336,7 @@ RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
             dayMessage.innerHTML = `🎯 MENSAJE FINAL DE CHAT <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
+        // ==================== FUNCIONES AUXILIARES ====================
         function obtenerSaludoPorHora() {
             const hora = new Date().getHours();
             if (hora >= 5 && hora < 12) return { saludo: '¡BENDECIDO DÍA PARA TI Y LOS TUYOS!', emoji: '☀️', periodo: 'mañana', texto: 'Buenos días' };
@@ -1364,6 +1379,7 @@ RECUERDA QUE PANAXTREAMING TAMBIÉN TE OFRECE: 🎬🔥
             else if (tipo === 'compra') messageInfo.classList.add('compra');
             else if (tipo === 'final') messageInfo.classList.add('final');
             else if (tipo === 'recontacto') messageInfo.classList.add('recontacto');
+            else if (tipo === 'saludo') messageInfo.classList.add('saludo');
             messageInfo.innerHTML = info;
             messageContainer.style.display = 'block';
             setTimeout(() => messageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
