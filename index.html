@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIAC - Sistema Integral de Atención al Cliente</title>
     <style>
-        /* ========== ESTILOS COMPLETOS (sin cambios) ========== */
+        /* ========== ESTILOS COMPLETOS ========== */
         * {
             margin: 0;
             padding: 0;
@@ -197,6 +197,7 @@
         .btn-opcion.pantalla { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
         .btn-opcion.cuenta { background: linear-gradient(135deg, #f87171 0%, #dc2626 100%); }
         .btn-opcion.renovacion { background: linear-gradient(135deg, #9f7aea 0%, #6b46c1 100%); }
+        .btn-opcion.descargamovil { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); }
         .btn-opcion:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .btn-opcion span { font-size: 2em; }
 
@@ -604,11 +605,11 @@
                 <button class="btn-close" onclick="toggleGeneradorFlujoPanel()">✕ CERRAR</button>
             </div>
 
-            <!-- Panel generador PANAX -->
+            <!-- Panel generador PANAX (con selector de horas para demo) -->
             <div id="generadorPanaxPanel" class="generadorpanax-panel">
                 <h3>🛠️ GENERADOR DE MENSAJES PANAXTREAMING</h3>
                 <div class="opciones-grid">
-                    <button id="btnPanaxDemo" class="btn-opcion demo" onclick="mostrarFormularioPanaxDemo()"><span>🕐</span> DEMO PANAX (12h)</button>
+                    <button id="btnPanaxDemo" class="btn-opcion demo" onclick="mostrarFormularioPanaxDemo()"><span>🕐</span> DEMO PANAX</button>
                     <button id="btnPanaxPantalla" class="btn-opcion pantalla" onclick="mostrarFormularioPanaxPantalla()"><span>📱</span> PANTALLA PANAX</button>
                     <button id="btnPanaxCuenta" class="btn-opcion cuenta" onclick="mostrarFormularioPanaxCuenta()"><span>👥</span> CUENTA PANAX</button>
                     <button id="btnPanaxRenovacion" class="btn-opcion renovacion" onclick="mostrarFormularioPanaxRenovacion()"><span>🔄</span> RENOVACIÓN PANAX</button>
@@ -616,13 +617,21 @@
                 <div id="formularioPanaxDatos" class="datos-form" style="display: none;">
                     <h4 id="formPanaxTitulo" style="text-align:center; margin-bottom:20px; color:#4a5568;"></h4>
                     <div class="form-group" id="panaxUsuarioGroup"><label for="panaxUsuario">👤 USUARIO:</label><input type="text" id="panaxUsuario" class="form-control" placeholder="Ingrese el usuario"></div>
-                    <div class="form-group" id="panaxClaveGroup"><label for="panaxClave">🔑 NUEVA CLAVE:</label><input type="text" id="panaxClave" class="form-control" placeholder="Ingrese la nueva clave"></div>
+                    <div class="form-group" id="panaxClaveGroup"><label for="panaxClave">🔑 CLAVE:</label><input type="text" id="panaxClave" class="form-control" placeholder="Ingrese la clave"></div>
+                    <!-- Selector de horas para DEMO PANAX (solo visible cuando se selecciona demo) -->
+                    <div id="panaxHorasGroup" class="select-group" style="display: none;">
+                        <label for="panaxHoras">⏱️ DURACIÓN DEL DEMO:</label>
+                        <select id="panaxHoras" class="horas-select">
+                            <option value="12">12 horas</option>
+                            <option value="2">2 horas</option>
+                        </select>
+                    </div>
                     <button class="btn-generar" onclick="generarMensajePanaxPersonalizado()"><span>⚡</span> GENERAR MENSAJE</button>
                 </div>
                 <button class="btn-close" onclick="toggleGeneradorPanaxPanel()">✕ CERRAR</button>
             </div>
 
-            <!-- Panel generador STELLA (con selector de horas) -->
+            <!-- Panel generador STELLA -->
             <div id="generadorStellaPanel" class="generadorstella-panel">
                 <h3>⭐ GENERADOR DE MENSAJES STELLA TV</h3>
                 <div class="opciones-grid">
@@ -630,6 +639,7 @@
                     <button id="btnStellaPantalla" class="btn-opcion pantalla" onclick="mostrarFormularioStellaPantalla()"><span>📱</span> PANTALLA STELLA</button>
                     <button id="btnStellaCuenta" class="btn-opcion cuenta" onclick="mostrarFormularioStellaCuenta()"><span>👥</span> CUENTA STELLA</button>
                     <button id="btnStellaRenovacion" class="btn-opcion renovacion" onclick="mostrarFormularioStellaRenovacion()"><span>🔄</span> RENOVACIÓN STELLA</button>
+                    <button id="btnStellaDescargaMovil" class="btn-opcion descargamovil" onclick="mostrarMensajeStellaDescargaMovil()"><span>📲</span> DESCARGA MÓVIL</button>
                 </div>
                 <div id="formularioStellaDatos" class="datos-form" style="display: none;">
                     <h4 id="formStellaTitulo" style="text-align:center; margin-bottom:20px; color:#4a5568;"></h4>
@@ -796,6 +806,61 @@
             const section = document.getElementById('comercialSection');
             section.classList.toggle('visible');
             if (section.classList.contains('visible')) setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+        }
+
+        // ==================== MENSAJE COMERCIAL COMPLETO ====================
+        function mostrarMensajeComercialCompleto() {
+            const mensaje = `*Hola! Claro que sí, ¡con todo gusto!* 😊 Tenemos dos excelentes aplicaciones que puede probar y decidir cuál le gusta más:
+
+📺 _*PANAXTREAMING*_
+
+1 Pantalla (un solo dispositivo): 3$ (a tasa BCV)
+
+Cuenta Completa (4 dispositivos): 8$ (a tasa BCV)
+
+🌟 *STELLA TV*
+
+1 Pantalla: 4.5$ (a tasa BCV)
+
+Cuenta Completa (4 dispositivos simultáneos): 11.5$ (a tasa BCV)
+
+*¡te mostramos el contenido de inmediato para que elija la mejor opción!* 👇`;
+
+            mostrarMensajeConCopia('📊 MENSAJE COMERCIAL', mensaje, 'comercial', null);
+            
+            setTimeout(() => {
+                toggleComercialSection();
+            }, 500);
+            
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📊 MENSAJE COMERCIAL <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
+        }
+
+        // ==================== MENSAJE DESCARGA MÓVIL STELLA ====================
+        function mostrarMensajeStellaDescargaMovil() {
+            const mensaje = `🎬 *¡LLEVA TODO EL ENTRETENIMIENTO EN TU BOLSILLO!* 📱✨
+
+Con *STELLA TV*, tú tienes el control total. Disfruta de la mejor estabilidad y funciones exclusivas:
+
+📥 Descarga y Disfruta: Baja tus películas y series favoritas para verlas sin internet. ¡Ideal para viajes o cuando estés fuera de casa! ✈️🍿
+
+🔔 ¡*Que no se te pase ni un juego! Activa las notificaciones de la app y recibe un aviso justo al inicio del partido de tu equipo favorito*! ⚽🏀🔥
+
+*¡Todo lo que buscas en un solo lugar!* 👇
+
+🔗 Haz clic en el link de descarga aquí:
+
+https://bit.ly/47FhwlF 📲
+
+¿Listo para activar tu suscripción hoy mismo? 🏆🚀`;
+
+            mostrarMensajeConCopia('📲 STELLA TV - DESCARGA MÓVIL', mensaje, 'generadorstella', 'btnStellaDescargaMovil');
+            const dayMessage = document.getElementById('dayMessage');
+            const saludoDia = obtenerSaludoDiaSemana();
+            const saludoHora = obtenerSaludoPorHora();
+            dayMessage.innerHTML = `📲 STELLA TV - DESCARGA MÓVIL <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
         }
 
         // ==================== GENERADOR STELLA ====================
@@ -974,47 +1039,58 @@
             toggleGeneradorFlujoPanel();
         }
 
-        // ==================== GENERADOR PANAX ====================
+        // ==================== GENERADOR PANAX (con selector de horas) ====================
         function mostrarFormularioPanaxDemo() {
             tipoPanaxActual = 'demo';
-            document.getElementById('formPanaxTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO PANAXTREAMING (12 HORAS)';
+            document.getElementById('formPanaxTitulo').innerHTML = '🕐 INGRESA DATOS DEL DEMO PANAXTREAMING';
             document.getElementById('panaxUsuarioGroup').style.display = 'block';
             document.getElementById('panaxClaveGroup').style.display = 'block';
+            document.getElementById('panaxHorasGroup').style.display = 'block';
             document.getElementById('formularioPanaxDatos').style.display = 'block';
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
+
         function mostrarFormularioPanaxPantalla() {
             tipoPanaxActual = 'pantalla';
             document.getElementById('formPanaxTitulo').innerHTML = '📱 INGRESA DATOS DE PANTALLA PANAXTREAMING';
             document.getElementById('panaxUsuarioGroup').style.display = 'block';
             document.getElementById('panaxClaveGroup').style.display = 'block';
+            document.getElementById('panaxHorasGroup').style.display = 'none';
             document.getElementById('formularioPanaxDatos').style.display = 'block';
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
+
         function mostrarFormularioPanaxCuenta() {
             tipoPanaxActual = 'cuenta';
             document.getElementById('formPanaxTitulo').innerHTML = '👥 INGRESA DATOS DE CUENTA PANAXTREAMING';
             document.getElementById('panaxUsuarioGroup').style.display = 'block';
             document.getElementById('panaxClaveGroup').style.display = 'block';
+            document.getElementById('panaxHorasGroup').style.display = 'none';
             document.getElementById('formularioPanaxDatos').style.display = 'block';
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
+
         function mostrarFormularioPanaxRenovacion() {
             tipoPanaxActual = 'renovacion';
             document.getElementById('formPanaxTitulo').innerHTML = '🔄 INGRESA DATOS PARA RENOVACIÓN PANAXTREAMING';
             document.getElementById('panaxUsuarioGroup').style.display = 'block';
             document.getElementById('panaxClaveGroup').style.display = 'block';
+            document.getElementById('panaxHorasGroup').style.display = 'none';
             document.getElementById('formularioPanaxDatos').style.display = 'block';
             document.getElementById('panaxUsuario').value = '';
             document.getElementById('panaxClave').value = '';
         }
+
         function generarMensajePanaxPersonalizado() {
             const usuario = document.getElementById('panaxUsuario').value.trim();
             const clave = document.getElementById('panaxClave').value.trim();
-            if (!usuario || !clave) { mostrarNotificacion('⚠️ Por favor ingresa usuario y clave', 'error'); return; }
+            if (!usuario || !clave) {
+                mostrarNotificacion('⚠️ Por favor ingresa usuario y clave', 'error');
+                return;
+            }
             const fecha = new Date();
             const opcionesFecha = { year: 'numeric', month: '2-digit', day: '2-digit' };
             const fechaStr = fecha.toLocaleDateString('es-VE', opcionesFecha);
@@ -1022,10 +1098,11 @@
             let mensaje = '', tipoTexto = '', botonId = '';
 
             if (tipoPanaxActual === 'demo') {
-                const fechaVenc = new Date(fecha.getTime() + 12 * 60 * 60 * 1000);
+                const horas = parseInt(document.getElementById('panaxHoras').value);
+                const fechaVenc = new Date(fecha.getTime() + horas * 60 * 60 * 1000);
                 const horaVence = fechaVenc.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-                mensaje = `*📺 DATOS DE SU DEMO PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVence} (12 horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
-                tipoTexto = 'DEMO';
+                mensaje = `*📺 DATOS DE SU DEMO PANAXTREAMING* 📺\n\n👤 Usuario: ${usuario}\n🔑 Clave: ${clave}\n🔞 Clave contenido adulto: 0000\n\n📅 Fecha de entrega: ${fechaStr}\n⏰ Hora de entrega: ${horaStr}\n\n⏳ Vence a las: ${horaVence} (${horas} horas después de creado)\n\n✨ ¡Disfruta de la mejor experiencia con PANAXTREAMING! ✨`;
+                tipoTexto = `DEMO ${horas}H`;
                 botonId = 'btnPanaxDemo';
             } else if (tipoPanaxActual === 'pantalla') {
                 const fechaVenc = new Date(fecha); fechaVenc.setDate(fecha.getDate() + 30);
@@ -1056,7 +1133,7 @@
             toggleGeneradorPanaxPanel();
         }
 
-        // ==================== FUNCIÓN SALUDO ACTUALIZADA ====================
+        // ==================== FUNCIÓN SALUDO ====================
         function generarMensajeSaludo(ejecutivo) {
             const hora = new Date().getHours();
             let saludoHora = '';
@@ -1085,42 +1162,23 @@
 
 Mil disculpas por la demora; tenemos muchos chats de atención tan importantes como el tuyo y ya estamos contigo. 😊
 
-Te ofrecemos 3 PLATAFORMAS PREMIUM 🌟 para disfrutar de:
+Tenemos para ti *TRES PLATAFORMAS PREMIUM* para el disfrute tuyo y de tu familia:
 
-⚽️ TV EN VIVO: Canales deportivos como ESPN, Fox Sports, DSports y más.
-🎬 CINE Y SERIES: Contenido de Netflix, Amazon Prime, Disney+, Max, entre otras.
+💎 *PANAXTREAMING* 🌟 *STELLA TV* 🔥 *FLUJO TV*
 
-Nuestras opciones y precios (Tasa BCV):
+📺 *Compatibilidad Total*
+_*ESTAS PLATAFORMAS SON COMPATIBLES CON:*_
 
-1️⃣ PANAXTREAMING 🚀 (Única con aplicación disponible en ROKU)
+Smart TV (Sistemas Android)
+Fire TV Stick
+Google TV / Onn
+PC
+Celulares Android
 
-📊 Características: +1500 canales internacionales, +100 nacionales, +8900 películas y +3000 series.
+🤔 *¿Qué contenido buscas?*
+Para poder brindarte el mejor apoyo, cuéntanos qué te gusta ver. ¡Así elegiremos juntos la opción ideal para ti y tu familia! 👨‍👩‍👧‍👦👇
 
-📱 Pantalla: 3$
-
-🏠 Cuenta Completa (4 dispositivos simultáneos): 7.5$
-
-2️⃣ FLUJO TV 📺
-
-📊 Características: +1800 canales y 20 mil películas y series.
-
-📱 Pantalla: 3.5$
-
-🏠 Cuenta Completa (3 dispositivos simultáneos): 8.5$
-
-3️⃣ STELLA TV ✨
-
-📊 Características: +2000 canales, eventos deportivos organizados, descargas para ver sin internet y reproducción en segundo plano.
-
-📱 Pantalla: 4.5$
-
-🏠 Cuenta Completa (3 dispositivos): 11.5$
-
-Dinos en qué equipo disfrutarás tu PRUEBA GRATIS: 📱 Teléfono, 🎥 Fire TV / Stick, 💻 PC o Laptop, o en tu 📺 Smart TV con sistema Android.
-
-⚠️ Nota: Solo Panaxtreaming es compatible con Roku; las otras dos plataformas no.
-
-¿Cuál de las tres deseas probar primero? 👇`;
+*Dinos en qué equipo disfrutarás tu PRUEBA GRATIS: 📱 Teléfono, 🎥 Fire TV / Stick, 💻 PC o Laptop, o en tu 📺 Smart TV con sistema Android.*`;
 
             let botonId = '';
             if (ejecutivo === 'ANGEL DUGARTE') botonId = 'btnAngel';
@@ -1138,45 +1196,7 @@ Dinos en qué equipo disfrutarás tu PRUEBA GRATIS: 📱 Teléfono, 🎥 Fire TV
             dayMessage.innerHTML = `💬 Mensaje de saludo para: <strong>${ejecutivo}</strong> <span class="time-indicator ${saludoHoraObj.periodo}">${saludoHoraObj.texto}</span> <span class="day-indicator ${saludoDiaObj.clase}">${saludoDiaObj.dia} ${saludoDiaObj.saludo ? '• ' + saludoDiaObj.saludo : ''}</span>`;
         }
 
-        // ==================== MENSAJES COMERCIALES ====================
-        function mostrarMensajeComercialCompleto() {
-            const mensaje = `*PANAXTREAMING TE OFRECE:* 🚀 *TV EN VIVO* 📺 +1500 CANALES EN VIVO INCLUYE ESPN, FOX SPORT, DIRECTV SPORT, HBO, NOTICIAS Y MAS 🏆, TAMBIÉN TE OFRECE MÁS DE 13000 PELÍCULAS Y SERIES DE ESTRENO Y CLÁSICAS 🎬 🍿
-
-Lo puedes disfrutar en tu teléfono 📱, Smart TV 📺 o Fire TV, Google TV, Roku o PC 💻
-
-*PANTALLA 30 DÍAS 3$ BCV* 📉 *CUENTA COMPLETA 4 DISPOSITIVOS SIMULTÁNEO 7.5$ TASA BCV* 💳
-
-*PIDE TU MUESTRA GRATIS 6 HORAS* 🎁 ✨
-_________________________________________________________________________________
-
-*FLUJO TV PREMIUM:* 🚀 *TV EN VIVO* 📺 +2000 CANALES EN VIVO INCLUYE ESPN, FOX SPORT, DIRECTV SPORT, HBO, NOTICIAS Y MAS 🏆, TAMBIÉN TE OFRECE MÁS DE 13000 PELÍCULAS Y SERIES DE ESTRENO Y CLÁSICAS 🎬 🍿 *MEJOR ESTABILIDAD EN TV EN VIVO*
-
-Lo puedes disfrutar en tu teléfono 📱, Smart TV 📺 o Fire TV, Google TV o PC 💻
-
-*PANTALLA 30 DÍAS 3.5$ BCV* 📉 *CUENTA COMPLETA 4 DISPOSITIVOS SIMULTÁNEO 8.5$ TASA BCV* 💳
-
-*PIDE TU MUESTRA GRATIS 3 HORAS* 🎁 ✨
-________________________________________________________________________________
-
-*STELLA TV* 🚀 *TV EN VIVO* 📺 +2500 CANALES EN VIVO INCLUYE ESPN (TODOS) , FOX SPORT, DIRECTV SPORT (TODOS) , HBO, NOTICIAS Y MAS 🏆, TAMBIÉN TE OFRECE MÁS DE 18000 PELÍCULAS Y SERIES DE ESTRENO Y CLÁSICAS 🎬 🍿 *LA MEJOR ESTABILIDAD EN TV EN VIVO* 📡
-
-Lo puedes disfrutar en tu teléfono 📱, Smart TV 📺 o Fire TV, Google TV o PC 💻
-
-😎 *TE PERMITE DESCARGAR CONTENIDO DE PELICULAS Y SERIES PARA VER SIN CONEXION A INTERNET* 📥 🎞️
-
-El catalogo de Peliculas y series esta organizado segun la plataforma donde esta es decir NETFLIX EN UNA CARPETA 📁 DISNEY UNA CARPETA 📁
-
-*PANTALLA 30 DÍAS 4.5$ BCV* 📉 *CUENTA COMPLETA 3 DISPOSITIVOS SIMULTÁNEO 11.5$ TASA BCV* 💳
-
-*PIDE TU MUESTRA GRATIS 2 HORAS* 🎁 ✨ 🚀`;
-            mostrarMensajeConCopia('📊 COMPARATIVA DE PLATAFORMAS', mensaje, 'comercial', null);
-            setTimeout(() => toggleComercialSection(), 500);
-            const dayMessage = document.getElementById('dayMessage');
-            const saludoDia = obtenerSaludoDiaSemana();
-            const saludoHora = obtenerSaludoPorHora();
-            dayMessage.innerHTML = `📊 COMPARATIVA DE PLATAFORMAS <span class="time-indicator ${saludoHora.periodo}">${saludoHora.texto}</span> <span class="day-indicator ${saludoDia.clase}">${saludoDia.dia} ${saludoDia.saludo ? '• ' + saludoDia.saludo : ''}</span>`;
-        }
-
+        // ==================== MENSAJES COMERCIALES INDIVIDUALES ====================
         function mostrarMensajeComercialPanax() {
             const mensaje = `🔥 *PANAXTREAMING TV GO* 🔥
 🇻🇪 *ORGULLOSAMENTE VENEZOLANA COMO TÚ* 🇻🇪
@@ -1187,7 +1207,7 @@ El catalogo de Peliculas y series esta organizado segun la plataforma donde esta
 
 📊 *NUESTRAS TARIFAS (30 DÍAS):*
 ✅ Por Pantalla: 3$
-✅ Cuenta Completa (4 Disp. Simultáneos): 7.5$
+✅ Cuenta Completa (4 Disp. Simultáneos): 8$
 📌 A tasa BCV del día.
 
 ✨ *ESTABILIDAD EN PELÍCULAS Y SERIES GARANTIZADA* ✨
