@@ -384,8 +384,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .message-content {
-            font-size: 1.1em;
-            line-height: 1.8;
+            font-size: 1.3em; /* ← AUMENTADO de 1.1em a 1.3em (2 puntos más grande) */
+            line-height: 2;
             color: #2d3748;
             white-space: pre-wrap;
             word-wrap: break-word;
@@ -624,6 +624,7 @@
                         <select id="panaxHoras" class="horas-select">
                             <option value="12">12 horas</option>
                             <option value="2">2 horas</option>
+                            <option value="1">1 hora</option>
                         </select>
                     </div>
                     <button class="btn-generar" onclick="generarMensajePanaxPersonalizado()"><span>⚡</span> GENERAR MENSAJE</button>
